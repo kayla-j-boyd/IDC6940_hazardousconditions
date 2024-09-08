@@ -1,6 +1,7 @@
 Kayla Boyd
 IDC6940
 
+
 1. Samar, A. E., Graziella D’Arrigo, Leonardis, D., Fusaro, M., Tripepi, G., & Roumeliotis, S. (2021). Methods to analyze time-to-event data: The cox regression analysis. Oxidative Medicine and Cellular Longevity, 2021 doi:https://doi.org/10.1155/2021/1302811
 
 Cox regression is used to perform survival analyses
