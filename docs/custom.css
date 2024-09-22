@@ -1,0 +1,28 @@
+---
+title: "Cox Regression Review"
+subtitle: "Capstone 6940"
+author: "Hazardous Conditions"
+execute:
+  echo: true
+  warning: false
+  message: false
+  error: false
+format: 
+  revealjs:
+    theme: moon
+bibliography: references.bib
+csl: ieee.csl
+embed-resources: true
+slide-number: false
+width: 1600
+height: 900
+df-print: paged
+html-math-method: katex
+editor: visual
+pdf-separate-fragments: true
+fig-align: center
+---
+
+ .reveal #refs {
+          font-size: 0.8em;
+    }
