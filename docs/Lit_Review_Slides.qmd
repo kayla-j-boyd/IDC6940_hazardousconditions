@@ -37,7 +37,7 @@ fig-align: center
 
         $$\beta_1x_1 +\beta_2x_2 + \dots + \beta_p x_n = linear\ combination\ of \ covariates\ and\ their\ coefficients$$
 
-    ---
+    ------------------------------------------------------------------------
 
 ## Hazard Ratios and Proportional Hazards
 
@@ -49,7 +49,7 @@ fig-align: center
 
 -   The assumption of a constant relationship between dependent and explanatory variables is called proportional hazards.
 
----
+------------------------------------------------------------------------
 
 ## Testing Proportional Hazards
 
@@ -87,7 +87,7 @@ ggsurvplot(fit, data = lung,
 #print(ggsurvplot)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Time-Varying Coefficients
 
