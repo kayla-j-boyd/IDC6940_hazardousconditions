@@ -1,0 +1,40 @@
+---
+title: "Week 7: EDA and Visualization"
+author: "Kayla Boyd"
+format: 
+  html:
+    self-contained: true
+    message: false
+    warning: false
+    error: true
+    code-overflow: wrap
+    code-annotations: hover
+execute:
+  echo: true
+editor: source
+---
+```{r}
+library(readr)
+turnover <- read_csv("turnover.csv")
+View(turnover)
+
+library(tidyverse) 
+library(dplyr)
+
+ggplot(data = turnover) + geom_point(mapping = aes(x = event, y = stag))
+
+turnover %>% count(gender) 
+turnover %>% count(coach)
+
+ggplot(data = turnover, mapping = aes(x = profession, y = extraversion)) + geom_boxplot()
+
+group_avg <- turnover %>% group_by(event) %>% summarise_at(vars(stag, extraversion, anxiety, independ, selfcontrol, novator), list(Mean_Trait = mean))
+
+print(group_avg)
+
+
+ggplot(data = turnover) + geom_point(mapping = aes(x = event, y = independ))
+```
+
+## Notes 
+- The visualizations so far have not given me any insight to what is causing attrition. From a tenure perspective there does not seem to be a strong correlation. It also does not seem to correlate to personality traits that were scored either.
