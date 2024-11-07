@@ -1,0 +1,50 @@
+---
+title: "Methods_Draft"
+format: html
+editor: visual
+author: Kayla Boyd
+---
+
+## Method: Cox Risk Regression
+
+In this study, we utilize the Cox Proportional Hazards Model to examine factors influencing survival. Cox Regression is a powerful tool in survival analysis that models the relationship between the survival time of subjects and one or more predictor variables. Survival can refer to development of a symptom, time to relapse, or time to death. Its appeal lies in its semi-parametric nature, as it does not assume a specific baseline hazard function, making it robust and popular in diverse fields like medicine, engineering, and social sciences.
+
+\
+
+**Model Assumptions**
+
+\
+
+A key assumption of the Cox model is the proportional hazards assumption, which asserts that the effects of different variables on the outcome (survival) are constant over time. This means that, although the baseline hazard function can vary over time, the effect of covariates on the hazard is multiplicative and time-independent. Another essential assumption pertains to censoring, where it is assumed that censoring is non-informative, meaning it is unlikely that the event of interest will be observed in all patients and missing or erroneous results can therefore not be included. This differs from logistic or linear regression.
+
+\
+
+**Model Variants**
+
+\
+
+The primary model employed in this study is the standard Cox Proportional Hazards model, which estimates the hazard function, $h(t | X) = h_0(t) \exp(\beta X)$, where $h_0(t)$represents the baseline hazard and $\beta$ represents the regression coefficients. In cases where the proportional hazards assumption does not hold, we may consider extensions like stratified Cox models, which allow for covariates that stratify the baseline hazard, or time-dependent Cox models, which can handle time-varying covariates.
+
+\
+
+**Testing Proportional Hazards**
+
+\
+
+To verify the proportional hazards assumption, we employ the Schoenfeld residuals test, a common diagnostic that assesses correlation between residuals and time. Graphical methods, such as log-minus-log survival plots, are also used to visually inspect proportional hazards. If these diagnostics suggest a violation of the proportional hazards assumption, adjustments are made, including consideration of time-varying covariates.
+
+\
+
+**Interpretation of Outcomes**
+
+\
+
+The output of a Cox model is typically interpreted in terms of hazard ratios. For each predictor, the hazard ratio describes the change in the hazard of the event (e.g., death, failure) for a one-unit increase in the predictor, holding all other factors constant. A hazard ratio greater than one indicates an increased risk, while a ratio less than one suggests a protective effect. If the risk factor is binary, the result can be interpreted as the estimated increase in the hazard ratio in patients with the risk factor vs. those without. P-values and confidence intervals around hazard ratios help determine the statistical significance and reliability of these effects.
+
+\
+
+**Addressing Time-Varying Coefficients**
+
+\
+
+To account for non-proportionality when it is detected, time-varying covariates may be introduced. This involves creating interaction terms between covariates and functions of time or using an extended Cox model framework. This approach allows the impact of certain variables on the hazard to change over time, enhancing the model's flexibility and accuracy when the proportional hazards assumption does not strictly hold.
