@@ -1,0 +1,269 @@
+---
+title: "EDA and Visualizations"
+author: "Kayla Boyd"
+format: 
+  html:
+    self-contained: true
+    message: false
+    warning: false
+    error: true
+    code-overflow: wrap
+    code-annotations: hover
+execute:
+  echo: true
+editor: source
+---
+```{r}
+library(readr)
+turnover <- read_csv("turnover.csv")
+View(turnover)
+
+library(tidyverse) 
+library(dplyr)
+library(corrplot)
+library(RColorBrewer)
+library(ggfortify)
+library(riskRegression)
+library(survival)
+library(stringr)
+library(zoo)
+library(ranger)
+library(ggplot2)
+library(readxl)
+library(MASS)
+library(ADGofTest)
+library(survminer)
+library(car)
+
+
+cat("Number of missing values :", sum(is.na(turnover)))
+cat("Number of duplicats: ", turnover %>%
+    duplicated() %>%
+    sum())
+
+turnover <- unique(turnover)
+
+turnover %>%
+  ggplot(aes(x = stag, color = factor(event),
+                              fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") + theme_minimal() + 
+  theme(legend.position = "top")
+
+n <- dim(turnover)[1]
+cat((n - sum(turnover$event))/n * 100, "% of observations are censored")
+                
+
+NUM_COLS <- c("stag", "age", "extraversion", "independ", "selfcontrol", "anxiety", "novator")
+CAT_COLS <- c("gender", "industry", "profession", "traffic", "coach", "head_gender", "greywage", "way")
+
+# transform CAT_COLS into categorical type
+for (COL in CAT_COLS){
+    turnover[COL] <- turnover[COL] %>% unlist() %>% factor()
+}
+# Selection of covariates (that are only discrete)
+turnover.cat <- turnover %>% 
+                select_if(is.factor) %>% 
+                mutate(event = turnover$event)
+
+# Continuous covariates
+turnover %>% ggplot(aes(x = stag, color = factor(event), 
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) +  
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = event, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = age, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = extraversion, color = factor(event), 
+                        fill = factor(event))) + 
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) + scale_color_brewer(palette = "Dark2") + 
+  scale_fill_brewer(palette = "Dark2") + theme_minimal() + 
+  theme(legend.position = "top")
+turnover %>% ggplot(aes(x = independ, color = factor(event), 
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = selfcontrol, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = anxiety, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = novator, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+
+# Categorical covariates
+
+turnover.cat %>% ggplot(aes(x = gender, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = industry, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = profession, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = traffic, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = coach, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = head_gender, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = greywage, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover.cat %>% ggplot(aes(x = way, color = factor(event), 
+                                     fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+```
+```{r}
+# Other encoding of discrete variables
+turnover.num <- turnover.cat[-9]
+
+levels(turnover.num$gender) <- 1:length(levels(turnover.cat$gender))
+levels(turnover.num$industry) <- 1:length(levels(turnover.cat$industry))
+levels(turnover.num$profession) <- 1:length(levels(turnover.cat$profession))
+levels(turnover.num$traffic) <- 1:length(levels(turnover.cat$traffic))
+levels(turnover.num$coach) <- 1:length(levels(turnover.cat$coach))
+levels(turnover.num$head_gender) <- 1:length(levels(turnover.cat$head_gender))
+levels(turnover.num$greywage) <- 1:length(levels(turnover.cat$greywage))
+levels(turnover.num$way) <- 1:length(levels(turnover.cat$way))
+turnover.num <- as.data.frame(apply(turnover.num, 2, as.numeric))
+
+turnover.num <- cbind(turnover.num, turnover %>%
+    select_if(is.numeric))
+
+# Correlation matrix
+corrplot(cor(turnover.num), col = brewer.pal(10, "BrBG"), method = "square", diag = FALSE)
+```
+```{r}
+
+# Survival function for each covariates
+km_gender<-survfit(Surv(stag, event)~gender, data = turnover, type="kaplan-meier")
+ggsurvplot(km_gender, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("female", "male"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Gender")
+
+km_industry<-survfit(Surv(stag, event)~industry, data = turnover, type ="kaplan-meier")
+ggsurvplot(km_industry, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Industry")
+
+km_profession<-survfit(Surv(stag, event)~profession, data = turnover, type="kaplan-meier")
+ggsurvplot(km_profession, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Profession")
+
+km_traffic<-survfit(Surv(stag, event)~traffic, data= turnover, type="kaplan-meier")
+ggsurvplot(km_traffic, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Traffic")
+
+km_coach<-survfit(Surv(stag, event)~coach, data = turnover, type="kaplan-meier")
+ggsurvplot(km_coach, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Coach")
+
+km_headgender<-survfit(Surv(stag, event)~head_gender, data= turnover, type="kaplan-meier")
+ggsurvplot(km_headgender, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("female", "male"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Head Gender")
+
+km_greywage<-survfit(Surv(stag, event)~greywage, data = turnover, type ="kaplan-meier")
+ggsurvplot(km_greywage, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("grey", "white"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Greywage")
+
+km_way<-survfit(Surv(stag, event)~way,
+                data= turnover,
+                type="kaplan-meier")
+ggsurvplot(km_way, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs=c("bus", "car", "foot"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Commuters(way)")
+```
+```{r}
+model0<-coxph(Surv(stag, event)~.,
+                 data = turnover)
+summary(model0)
+
+step(model0)
+
+model1<-coxph(Surv(stag, event)~age + industry + profession + traffic + greywage + way + selfcontrol + anxiety,
+                data = turnover)
+summary(model1)
+
+hr=exp(model1$coefficients)
+hr
+```
