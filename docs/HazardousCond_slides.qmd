@@ -45,7 +45,7 @@ fig-align: center
 ::: panel-tabset
 ## Assumptions and the Hazard Ratio
 
--   The assumption of a constant relationship between dependent and explanatory variables is called proportional hazards.
+-   The assumption of a constant relationship between dependent and explanatory variables is called proportional hazards [@Bellera2010].
 
 -   The hazard function is the probability that an individual will experience an event (death) within a certain time interval [@Walters2012].
 
@@ -57,9 +57,9 @@ fig-align: center
 
 **Graphical strategies to assess proportionality assumption:**
 
--   Kaplan-Meier Survival Distribution \$S(t)\$: Plot \$S(t)\$ as a function of survival time for each level covariate.
+-   Kaplan-Meier Survival Distribution $S(t)$: Plot $(S(t))$ as a function of survival time for each level covariate.
 
--   Plot the function \$log(-log(S(t)))\$ as a function of the log survival time (log represent natural log).
+-   Plot the function $(\log(-\log(S(t))))$ as a function of the log survival time (log represent natural log).
 
 -   Schoenfeld Residuals
 
@@ -201,7 +201,9 @@ library(readr)
 turnover <- read_csv("turnover.csv")
 View(turnover)
 
+library(broom)
 library(tidyverse) 
+library(tidyr)
 library(dplyr)
 library(corrplot)
 library(RColorBrewer)
@@ -217,6 +219,14 @@ library(MASS)
 library(ADGofTest)
 library(survminer)
 library(car)
+library(gtsummary)
+library(ggplot2)
+library(gridExtra)
+library(janitor)
+library(magrittr)
+library(gt)
+library(knitr)
+library(kableExtra)
 
 # Check for null and duplicate values
 
@@ -540,58 +550,109 @@ hr
 
 ## Model Comparison
 
-|   | Crude Model | Adjusted Model |
-|----|:--:|:--:|
-| Covariate | Hazard ratio (95% CI), p-value | Hazard ratio (95% CI), p-value |
-| genderm | (0.6977,1.1489) 0.384855 | Excluded |
-| **age** | **(1.0076,1.0356) 0.002292** | **(1.00801,1.0337) 0.001349** |
-| industryBanks | (0.385,1.6444) 0.537112 | (0.36751,1.5243) 0.424614 |
-| industryBuilding | (0.3668,1.725) 0.562272 | (0.35777,1.6425) 0.494175 |
-| industryConsult | (0.3234, 1.4235) 0.304934 | (0.30707,1.3058) 0.215967 |
-| industryetc | (0.2701,1.1797) 0.128365 | (0.25483,1.0823) 0.08089 |
-| industryHoReCa | (0.1807,1.5343) 0.239782 | (0.15933,1.324) 0.149758 |
-| **industryIT** | **(0.141,0.658) 0.002482** | **(0.13483,0.6111) 0.001206** |
-| **industrymanufacture** | **(0.216,0.9352) 0.032415** | **(0.20195,0.8531) 0.016744** |
-| industryMining | (0.2267,1.3199) 0.179465 | (0.21711,1.2319) 0.136485 |
-| **industryPharma** | **(0.1426,0.9391) 0.036562** | **(0.13973,0.8899) 0.027324** |
-| **industryPowerGeneration** | **(0.1469,0.8631) 0.022261** | **(0.14093,0.7992) 0.013651** |
-| **industryRealEstate** | **(0.0562,0.5642) 0.003362** | **(0.05197,0.5066) 0.001745** |
-| **industryRetail** | **(0.1729,0.7194) 0.004165** | **(0.16474,0.6627) 0.001818** |
-| industryState | (0.2297,1.1466) 0.103875 | (0.21764,1.0505) 0.066154 |
-| **industryTelecom** | **(0.1267,0.7348) 0.008119** | **(0.12085,0.6725) 0.004154** |
-| **industrytransport** | **(0.1843,0.9868) 0.046482** | **(0.18435,0.9644) 0.040775** |
-| professionBusinessDevelopment | (0.6728,4.9436) 0.237597 | (0.67567,4.8254) 0.238702 |
-| **professionCommercial** | **(1.0043,7.3408) 0.049022** | **(1.03089,7.2727) 0.043279** |
-| professionConsult | (0.638,4.9074) 0.272921 | (0.63753,4.6951) 0.281828 |
-| professionEngineer | (0.9446,7.8047) 0.063726 | (0.91679,7.2203) 0.072662 |
-| professionetc | (0.6267,4.2195) 0.3176 | (0.61331,4.0715) 0.34336 |
-| professionFinance | (0.3765,2.9634) 0.91722 | (0.38398,2.9249) 0.910784 |
-| professionHR | (0.5274,2.841) 0.637865 | (0.54258,2.8666) 0.602987 |
-| professionIT | (0.409,2.8105) 0.887228 | (0.40656,2.6084) 0.950654 |
-| professionLaw | (0.4205,5.3292) 0.53352 | (0.39112,4.8201) 0.620736 |
-| **professionmanage** | **(1.3551,9.6256) 0.010245** | **(1.35933,9.565) 0.009974** |
-| professionMarketing | (0.8028,5.3221) 0.132411 | (0.79103,5.156) 0.141624 |
-| professionPR | (0.6648,8.173) 0.186097 | (0.65107,7.9465) 0.197889 |
-| professionSales | (0.6627,4.1455) 0.280002 | (0.6785,4.0634) 0.266774 |
-| professionTeaching | (0.6072,5.659) 0.278446 | (0.61406,5.6983) 0.270502 |
-| **trafficempjs** | **(1.3655,4.6877) 0.003179** | **(1.28261,4.3232) 0.005729** |
-| trafficfriends | (0.5777,2.21) 0.721151 | (0.53583,2.0013) 0.917244 |
-| trafficKA | (0.5762,2.3039) 0.688659 | (0.5581,2.2001) 0.769274 |
-| trafficrabrecNErab | (0.9421,3.1768) 0.077124 | (0.88821,2.9476) 0.115817 |
-| trafficrecNErab | (0.4498,2.0064) 0.893095 | (0.42032,1.8463) 0.736996 |
-| trafficreferal | (0.7639,2.7337) 0.257711 | (0.72498,2.554) 0.337642 |
-| **trafficyoujs** | **(1.0493,3.5293) 0.034395** | **(1.00196,3.3336) 0.049257** |
-| coachno | (0.85,1.316) 0.615221 | Excluded |
-| coachyes | (0.9172,1.6628) 0.164329 | Excluded |
-| head_genderm | (0.8642,1.2921) 0.590846 | Excluded |
-| **greywagewhite** | **(0.4625,0.7863) 0.000187** | **(0.45996,0.7778) 0.000125** |
-| **waycar** | **(0.6669,1.0019) 0.052153** | **(0.66226,0.9901) 0.039682** |
-| **wayfoot** | **(0.4751,0.9404) 0.020726** | **(0.48798,0.9627) 0.029301** |
-| extraversion | (0.9485,1.0899) 0.639236 | Excluded |
-| independ | (0.9144,1.052) 0.587962 | Excluded |
-| **selfcontrol** | **(0.8904,1.0249) 0.202321** | **(0.90005,0.9838) 0.007353** |
-| **anxiety** | **(0.8899,1.0193) 0.158827** | **(0.90432,1.0021) 0.06013** |
-| novator | (0.9503,1.0716) 0.766196 | Excluded |
++-------------------------------+--------------------------------+--------------------------------+
+|                               | Crude Model                    | Adjusted Model                 |
++===============================+:==============================:+:==============================:+
+| Covariate                     | Hazard ratio (95% CI), p-value | Hazard ratio (95% CI), p-value |
++-------------------------------+--------------------------------+--------------------------------+
+| genderm                       | (0.6977,1.1489) 0.384855       | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| **age**                       | **(1.0076,1.0356) 0.002292**   | **(1.00801,1.0337) 0.001349**  |
++-------------------------------+--------------------------------+--------------------------------+
+| industryBanks                 | (0.385,1.6444) 0.537112        | (0.36751,1.5243) 0.424614      |
++-------------------------------+--------------------------------+--------------------------------+
+| industryBuilding              | (0.3668,1.725) 0.562272        | (0.35777,1.6425) 0.494175      |
++-------------------------------+--------------------------------+--------------------------------+
+| industryConsult               | (0.3234, 1.4235) 0.304934      | (0.30707,1.3058) 0.215967      |
++-------------------------------+--------------------------------+--------------------------------+
+| industryetc                   | (0.2701,1.1797) 0.128365       | (0.25483,1.0823) 0.08089       |
++-------------------------------+--------------------------------+--------------------------------+
+| industryHoReCa                | (0.1807,1.5343) 0.239782       | (0.15933,1.324) 0.149758       |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryIT**                | **(0.141,0.658) 0.002482**     | **(0.13483,0.6111) 0.001206**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **industrymanufacture**       | **(0.216,0.9352) 0.032415**    | **(0.20195,0.8531) 0.016744**  |
++-------------------------------+--------------------------------+--------------------------------+
+| industryMining                | (0.2267,1.3199) 0.179465       | (0.21711,1.2319) 0.136485      |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryPharma**            | **(0.1426,0.9391) 0.036562**   | **(0.13973,0.8899) 0.027324**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryPowerGeneration**   | **(0.1469,0.8631) 0.022261**   | **(0.14093,0.7992) 0.013651**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryRealEstate**        | **(0.0562,0.5642) 0.003362**   | **(0.05197,0.5066) 0.001745**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryRetail**            | **(0.1729,0.7194) 0.004165**   | **(0.16474,0.6627) 0.001818**  |
++-------------------------------+--------------------------------+--------------------------------+
+| industryState                 | (0.2297,1.1466) 0.103875       | (0.21764,1.0505) 0.066154      |
++-------------------------------+--------------------------------+--------------------------------+
+| **industryTelecom**           | **(0.1267,0.7348) 0.008119**   | **(0.12085,0.6725) 0.004154**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **industrytransport**         | **(0.1843,0.9868) 0.046482**   | **(0.18435,0.9644) 0.040775**  |
++-------------------------------+--------------------------------+--------------------------------+
+| professionBusinessDevelopment | (0.6728,4.9436) 0.237597       | (0.67567,4.8254) 0.238702      |
++-------------------------------+--------------------------------+--------------------------------+
+| **professionCommercial**      | **(1.0043,7.3408) 0.049022**   | **(1.03089,7.2727) 0.043279**  |
++-------------------------------+--------------------------------+--------------------------------+
+| professionConsult             | (0.638,4.9074) 0.272921        | (0.63753,4.6951) 0.281828      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionEngineer            | (0.9446,7.8047) 0.063726       | (0.91679,7.2203) 0.072662      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionetc                 | (0.6267,4.2195) 0.3176         | (0.61331,4.0715) 0.34336       |
++-------------------------------+--------------------------------+--------------------------------+
+| professionFinance             | (0.3765,2.9634) 0.91722        | (0.38398,2.9249) 0.910784      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionHR                  | (0.5274,2.841) 0.637865        | (0.54258,2.8666) 0.602987      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionIT                  | (0.409,2.8105) 0.887228        | (0.40656,2.6084) 0.950654      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionLaw                 | (0.4205,5.3292) 0.53352        | (0.39112,4.8201) 0.620736      |
++-------------------------------+--------------------------------+--------------------------------+
+| **professionmanage**          | **(1.3551,9.6256) 0.010245**   | **(1.35933,9.565) 0.009974**   |
++-------------------------------+--------------------------------+--------------------------------+
+| professionMarketing           | (0.8028,5.3221) 0.132411       | (0.79103,5.156) 0.141624       |
++-------------------------------+--------------------------------+--------------------------------+
+| professionPR                  | (0.6648,8.173) 0.186097        | (0.65107,7.9465) 0.197889      |
++-------------------------------+--------------------------------+--------------------------------+
+| professionSales               | (0.6627,4.1455) 0.280002       | (0.6785,4.0634) 0.266774       |
++-------------------------------+--------------------------------+--------------------------------+
+| professionTeaching            | (0.6072,5.659) 0.278446        | (0.61406,5.6983) 0.270502      |
++-------------------------------+--------------------------------+--------------------------------+
+| **trafficempjs**              | **(1.3655,4.6877) 0.003179**   | **(1.28261,4.3232) 0.005729**  |
++-------------------------------+--------------------------------+--------------------------------+
+| trafficfriends                | (0.5777,2.21) 0.721151         | (0.53583,2.0013) 0.917244      |
++-------------------------------+--------------------------------+--------------------------------+
+| trafficKA                     | (0.5762,2.3039) 0.688659       | (0.5581,2.2001) 0.769274       |
++-------------------------------+--------------------------------+--------------------------------+
+| trafficrabrecNErab            | (0.9421,3.1768) 0.077124       | (0.88821,2.9476) 0.115817      |
++-------------------------------+--------------------------------+--------------------------------+
+| trafficrecNErab               | (0.4498,2.0064) 0.893095       | (0.42032,1.8463) 0.736996      |
++-------------------------------+--------------------------------+--------------------------------+
+| trafficreferal                | (0.7639,2.7337) 0.257711       | (0.72498,2.554) 0.337642       |
++-------------------------------+--------------------------------+--------------------------------+
+| **trafficyoujs**              | **(1.0493,3.5293) 0.034395**   | **(1.00196,3.3336) 0.049257**  |
++-------------------------------+--------------------------------+--------------------------------+
+| coachno                       | (0.85,1.316) 0.615221          | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| coachyes                      | (0.9172,1.6628) 0.164329       | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| head_genderm                  | (0.8642,1.2921) 0.590846       | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| **greywagewhite**             | **(0.4625,0.7863) 0.000187**   | **(0.45996,0.7778) 0.000125**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **waycar**                    | **(0.6669,1.0019) 0.052153**   | **(0.66226,0.9901) 0.039682**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **wayfoot**                   | **(0.4751,0.9404) 0.020726**   | **(0.48798,0.9627) 0.029301**  |
++-------------------------------+--------------------------------+--------------------------------+
+| extraversion                  | (0.9485,1.0899) 0.639236       | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| independ                      | (0.9144,1.052) 0.587962        | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
+| **selfcontrol**               | **(0.8904,1.0249) 0.202321**   | **(0.90005,0.9838) 0.007353**  |
++-------------------------------+--------------------------------+--------------------------------+
+| **anxiety**                   | **(0.8899,1.0193) 0.158827**   | **(0.90432,1.0021) 0.06013**   |
++-------------------------------+--------------------------------+--------------------------------+
+| novator                       | (0.9503,1.0716) 0.766196       | Excluded                       |
++-------------------------------+--------------------------------+--------------------------------+
 
 ## Predictions
 
@@ -616,6 +677,634 @@ Our results show a survival probability of 38% for the 25-year old, and 17% perc
 -   Eight variables were said to have a higher influence on survival rate: age, industry, profession, traffic, greywage, way, selfcontrol, anxiety.
 -   Study objective is to predict employee attrition to mitigate loss to the company.
 -   Companies can provide benefits or stipends (such as bus passes, in this case) to try and retain employees. Specific industries can be focused on to improve retention.
+
+## Analysis: Modeling of Survival after Chemotherapy for Colon Cancer {.smaller}
+
+### By Hermela Shimelis
+
+-   **Data**: Survival after chemotherapy for Stage B/C colon cancer [@survival-book, @survival-package]
+
+-   **Goal**: Model the relationship between survival time and treatment groups
+
+-   **Predictors:**
+
++-----------------------------+---------------------------------------------+
+| **Category**                | **Variables**                               |
++=============================+=============================================+
+| **Treatments**              | \- Observation (no treatment)               |
+|                             |                                             |
+|                             | \- Amisole (Lev)                            |
+|                             |                                             |
+|                             | \- Amisole + 5-FU                           |
++-----------------------------+---------------------------------------------+
+| **Patient Characteristics** | \- Age                                      |
+|                             |                                             |
+|                             | \- Sex                                      |
++-----------------------------+---------------------------------------------+
+| **Tumor Characteristics**   | \- Colon perforation and obstruction        |
+|                             |                                             |
+|                             | \- Adherence to nearby organs               |
+|                             |                                             |
+|                             | \- Tumor differentiation                    |
+|                             |                                             |
+|                             | \- Local spread                             |
++-----------------------------+---------------------------------------------+
+
+------------------------------------------------------------------------
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+
+#Load data
+colon <- as_tibble(colon)
+head(colon)
+```
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+colon_surv <- colon%>%filter(etype == 2) 
+```
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+na_counts <- sapply(colon_surv, function(x)sum(is.na(x)))
+na_counts
+
+# replace NAs with mode
+table(colon_surv$differ)
+mode(colon_surv$differ)
+median(colon_surv$nodes, na.rm= TRUE)
+
+colon_surv$differ <- if_else(is.na(colon_surv$differ), 2,colon_surv$differ)
+colon_surv$nodes <- if_else(is.na(colon_surv$nodes), 2,colon_surv$nodes)
+```
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+colon_surv <- colon_surv%>%mutate(differentiation = case_when(differ == 1 ~ "well",
+                                                              differ == 2 ~ "moderate",
+                                                              differ == 3 ~ "poor"),
+                                  local_spread = case_when(extent == 1 ~ "submucosa",
+                                                           extent == 2 ~ "muscle",
+                                                           extent == 3 ~ "serosa",
+                                                           extent == 4 ~ "contiguous"),
+                                  surg_to_reg_time = case_when(surg == 0~ "short",
+                                                               surg == 1 ~ "long"))
+
+```
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+library(survival)
+library(survminer)
+library(ggplot2)
+library(gridExtra)
+library(dplyr)
+```
+
+## Exploratory Data Analysis
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: TRUE
+
+# Graphical strategies to assess proportionality assumption
+
+# Subset data for modeling
+df <- colon_surv%>%dplyr::select(!c(id,study,etype,differ, extent,surg_to_reg_time, nodes))
+
+
+# sample data for survival plot
+set.seed(42)
+durations <- rexp(100, 0.1)
+event_observed <- rbinom(100, 1, 0.8)
+covariate <- sample(0:1, 100, replace = TRUE)
+
+# Kaplan-Meier Survival Distribution S(t)
+fit <- survfit(Surv(durations, event_observed) ~ covariate)
+plot1 <- ggsurvplot(fit, data = data.frame(durations, event_observed, covariate),
+                    xlab = "Survival Time", ylab = "Survival Probability",
+                    title = "Kaplan-Meier Survival Distribution S(t)")$plot
+
+
+
+# Plot log(-log(S(t))) vs log(Survival Time)
+fit1 <- survfit(Surv(time,status) ~ 1, data = df)
+surv_prob <- summary(fit1)$surv
+log_log_s <- log(-log(surv_prob))
+log_time <- log(summary(fit1)$time)
+
+plot2 <- ggplot(data.frame(log_time, log_log_s), aes(x = log_time, y = log_log_s)) +
+  geom_line() +
+  xlab("log(Survival Time)") +
+  ylab("log(-log(S(t)))") +
+  ggtitle("log(-log(S(t))) vs log(Survival Time)")
+
+# Schoenfeld Residuals
+m1 <- coxph(Surv(time, status) ~ rx, data = df)
+schoenfeld_res <- cox.zph(m1)
+schoenfeld_df <- as.data.frame(schoenfeld_res$y)
+
+
+# Check the structure of schoenfeld_df
+#str(schoenfeld_df)
+
+# Assuming the residuals are in the first column
+plot3 <- ggplot(schoenfeld_df, aes(x = schoenfeld_res$time, y = schoenfeld_df[,1])) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  xlab("Time") +
+  ylab("Schoenfeld Residuals") +
+  ggtitle("Schoenfeld Residuals")
+
+# Arrange the plots in a single figure with three panels
+
+grid.arrange(plot1, plot2, plot3, ncol = 2)
+
+```
+
+## Kaplan-Meier Curve Stratified by Treatment Groups
+
+```{r}
+
+# Estimate the median survival time among the three groups
+survfit(Surv(time,status) ~ rx, data = colon_surv)
+
+# count the number of events after 2080 days, which is the median survival time among the observation group
+tt <- colon_surv%>%filter(time > 2083)%>% group_by(rx)%>%summarise(ct = n(),
+                                                                   death = sum(status))
+# Plot survival curve
+fit <- survfit(Surv(time,status) ~ rx, data = colon_surv)
+ggsurvplot(fit, data=colon_surv, risk.table = TRUE)
+
+# Estimate the probability of surviving beyond 3000 days
+summary(survfit(Surv(time, status) ~ rx, data = colon_surv), times = 3000)
+
+# compare significant difference in survival times between the three groups
+survdiff(Surv(time, status)~ rx, data = colon_surv)
+
+
+```
+
+```{r}
+
+# Plot survival curve
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: TRUE
+fit <- survfit(Surv(time,status) ~ rx, data = colon_surv)
+ggsurvplot(fit, data=colon_surv, risk.table = TRUE)
+
+```
+
+```{r}
+#| echo: FALSE
+#| message: false
+#| warning: false
+#| include: false
+
+model <- coxph(formula = Surv(time, status) ~ rx + surg + obstruct + 
+    differentiation + node4 + local_spread, data = df)
+
+summary(model)
+
+cox_summary <- tidy(model)
+
+```
+
+## Cox Regression Models
+
+::: panel-tabset
+## Model 1: Base Model
+
+```{r}
+library(broom)
+#| echo: False
+#| message: false
+#| warning: false
+#| include: false
+m0 <- coxph(Surv(time, status) ~ 1, data = df)
+summary_m0 = summary(m0)
+c_index_m0 <- concordance(m0)
+#cat("Concordance of the base model:",c_index_m0$concordance)
+
+```
+
+## Model 2: Univariate model
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+
+m1 <- coxph(Surv(time, status) ~ rx, data = df)
+
+# Create the regression table and add concordance statistic
+summary_table <- tbl_regression(m1, exponentiate = TRUE) %>%
+  add_glance_source_note(
+    label = list(concordance = "Concordance"),
+    include = c("concordance")
+  ) %>%
+  modify_table_styling(
+    columns = p.value,
+    rows = p.value < 0.05,
+    text_format = "bold"
+  )
+
+# Convert to gt table, increase font size, and adjust width
+gt_table <- as_gt(summary_table) %>%
+  tab_options(
+    table.font.size = px(20),  # Increase font size
+    table.align = "center",      # Align table to the left
+    table.width = pct(80)     # Make the table wider
+  )
+
+# Print the gt table
+gt_table
+```
+
+## Model 3: All predictors
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: True
+
+# Full variables: All predictors
+m2 <- coxph(Surv(time, status) ~ rx+ age + sex + perfor + adhere + surg + obstruct + differentiation + node4+ local_spread, data = df)
+
+summary_table <- tbl_regression(m2, exponentiate = TRUE) %>%
+  add_glance_source_note(
+    label = list(concordance = "Concordance"),
+    include = c("concordance")
+  ) %>%
+  modify_table_styling(
+    columns = p.value,
+    rows = p.value < 0.05,
+    text_format = "bold"
+  )
+
+gt_table <- as_gt(summary_table) %>%
+  tab_options(
+    table.font.size = px(14),  # Reduce font size
+    table.align = "center",    # Align table to the center
+    table.width = pct(80),     # Make the table wider
+    data_row.padding = px(2)   # Reduce row padding
+  )
+
+gt_table
+```
+
+## Model 4: Step-wise Selected variables
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+# Significant predictors: stepwise-selected variables
+m3 <- coxph(Surv(time, status) ~ rx + age + surg + obstruct + 
+    differentiation + node4 + local_spread, data = df)
+
+summary_table <- tbl_regression(m3, exponentiate = TRUE) %>%
+  add_glance_source_note(
+    label = list(concordance = "Concordance"),
+    include = c("concordance")
+  ) %>%
+  modify_table_styling(
+    columns = p.value,
+    rows = p.value < 0.05,
+    text_format = "bold"
+  )
+
+gt_table <- as_gt(summary_table) %>%
+  tab_options(
+    table.font.size = px(14),  # Reduce font size
+    table.align = "center",    # Align table to the center
+    table.width = pct(80),     # Make the table wider
+    data_row.padding = px(2)   # Reduce row padding
+  )
+
+gt_table
+```
+
+## Proportional Hazard Assumption is Not Met
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: false
+cox.zph(m3) # final model with step wise variable selection
+zph_test <- cox.zph(m3)
+zph_test
+# Convert the Schoenfeld residuals test results to a data frame
+zph_df <- as.data.frame(zph_test$table)
+zph_df$Variable <- rownames(zph_df)
+
+zph_df <- as.data.frame(zph_test$table)
+zph_df$Variable <- rownames(zph_df)
+
+zph_df <- zph_df %>%
+  mutate(
+    chisq = round(chisq, 3),
+    p = round(p, 3)
+  )
+```
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+# Print the table in a Quarto presentation slide
+zph_df %>%
+  kbl(caption = "Schoenfeld Residuals Test Results") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE, align = "center")
+```
+
+```{R}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: False
+
+m3 <- coxph(Surv(time, status) ~ rx + age + surg + obstruct + 
+    differentiation + node4 + local_spread, data = df)
+
+# Schoenfeld Residuals
+schoenfeld_res <- cox.zph(m3)
+schoenfeld_df <- as.data.frame(schoenfeld_res$y)
+
+# Assuming the residuals are in the first column
+plot3 <- ggplot(schoenfeld_df, aes(x = schoenfeld_res$time, y = schoenfeld_df[,1])) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  xlab("Time") +
+  ylab("Schoenfeld Residuals") +
+  ggtitle("Schoenfeld Residuals")
+
+
+```
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| include: false
+# Load necessary libraries
+library(survival)
+library(ggplot2)
+library(gridExtra)
+
+# Fit the Cox proportional hazards model
+m3 <- coxph(Surv(time, status) ~ rx + age + surg + obstruct + differentiation + node4 + local_spread, data = df)
+
+zph_test <- cox.zph(m3)
+zph_test
+# Calculate Schoenfeld residuals
+schoenfeld_res <- cox.zph(m3)
+schoenfeld_df <- as.data.frame(schoenfeld_res$y)
+time <- schoenfeld_res$time
+
+# Create a list to store plots
+plots <- list()
+
+# Loop through each variable to create plots
+for (i in 1:ncol(schoenfeld_df)) {
+  p <- ggplot(schoenfeld_df, aes_string(x = "time", y = names(schoenfeld_df)[i])) +
+    geom_point() +
+    geom_smooth(method = "loess") +
+    xlab("Time") +
+    ylab("Schoenfeld Residuals") +
+    ggtitle(paste("Schoenfeld Residuals for", names(schoenfeld_df)[i]))
+  plots[[i]] <- p
+}
+
+# Arrange the plots in a grid
+grid.arrange(grobs = plots, ncol = 2)
+```
+
+## Model 5: Stratified Model
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+# Final Model
+m4 <- coxph(Surv(time, status) ~ rx + age + surg + strata(obstruct) + strata(differentiation) + node4 +
+              local_spread, data = df)
+
+summary_table <- tbl_regression(m4, exponentiate = TRUE) %>%
+  add_glance_source_note(
+    label = list(concordance = "Concordance"),
+    include = c("concordance")
+  ) %>%
+  modify_table_styling(
+    columns = p.value,
+    rows = p.value < 0.05,
+    text_format = "bold"
+  )
+
+gt_table <- as_gt(summary_table) %>%
+  tab_options(
+    table.font.size = px(14),  # Reduce font size
+    table.align = "center",    # Align table to the center
+    table.width = pct(80),     # Make the table wider
+    data_row.padding = px(2)   # Reduce row padding
+  )
+
+gt_table
+```
+:::
+
+## Stratified Model Meets Proportional Hazards Assumption
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: false
+cox.zph(m4) # final model with step wise variable selection
+zph_test <- cox.zph(m4)
+zph_test
+# Convert the Schoenfeld residuals test results to a data frame
+zph_df <- as.data.frame(zph_test$table)
+zph_df$Variable <- rownames(zph_df)
+zph_df <- zph_df %>%
+  mutate(
+    chisq = round(chisq, 3),
+    p = round(p, 3)
+  )
+
+
+```
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+# Print the table in a Quarto presentation slide
+
+
+zph_df %>%
+  kbl(caption = "Schoenfeld Residuals Test Results") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, position = "center") %>%
+  row_spec(0, bold = TRUE, align = "center")
+
+```
+
+## Model Evaluation Metrics
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: true
+m0 <- coxph(Surv(time, status) ~ 1, data = df)
+m1 <- coxph(Surv(time, status) ~ rx, data = df)
+m2 <- coxph(Surv(time, status) ~ rx+ age + sex + perfor + adhere + surg + obstruct + differentiation + node4+
+              local_spread, data = df)  
+
+m3 <- coxph(Surv(time, status) ~ rx + age + surg + obstruct + 
+    differentiation + node4 + local_spread, data = df)
+m4 <- coxph(Surv(time, status) ~ rx + age + surg + strata(obstruct) + strata(differentiation) + node4 +
+              local_spread, data = df)
+
+library(knitr)
+
+models <- list(m0, m1, m2, m3, m4)
+
+# Add descriptions for each model
+descriptions <- c(
+  "Base model",
+  "Treatment",
+  "Full variables",
+  "Stepwise-selected variables",
+  "Stratified"
+)
+
+
+# Create a data frame to store results
+results <- data.frame(
+  Model = character(),
+  Description = character(),
+  AIC = numeric(),
+  BIC = numeric(),
+  C_Index = numeric(),
+  stringsAsFactors = FALSE
+)
+
+# Function to calculate and store metrics for each model
+for (i in seq_along(models)) {
+  model <- models[[i]]
+  
+  # Extract AIC and BIC
+  aic <- AIC(model)
+  bic <- BIC(model)
+  
+  # Add C-index
+  c_index <- concordance(model)$concordance
+  
+  # Append results to the data frame
+  results <- rbind(results, data.frame(
+    Model = paste("Model", i),
+    Description = descriptions[i],
+    AIC = aic,
+    BIC = bic,
+    C_Index = round(c_index, 3)
+  ))
+}
+
+# Print the table using kable and kableExtra
+results %>%
+  kbl(caption = "") %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"), full_width = FALSE, position = "center", font_size = 32 ) %>%
+  column_spec(1, bold = TRUE) %>%
+  column_spec(2:5, width = "10em") %>%
+  kable_styling(position = "center")
+```
+
+## K-fold Cross Validation
+
+```{r}
+
+#| echo: False
+#| message: false
+#| warning: false
+#| include: False
+
+library(survival)
+library(caret)
+
+# Fit the Cox model
+cox_model <- coxph(Surv(time, status) ~ rx + age + surg + strata(obstruct) + strata(differentiation) + node4 + local_spread, data = df)
+
+# Calculate the original c-index
+c_index_original <- survConcordance(Surv(time, status) ~ predict(cox_model), data = df)
+#cat("Original c-index:", c_index_original$concordance, "\n")
+
+# Create a function for calculating c-index in each fold using survConcordance
+cox_cindex <- function(train_data, test_data) {
+  fit <- coxph(Surv(time, status) ~ rx + age + surg + strata(obstruct) + strata(differentiation) + node4 + local_spread, data = train_data)
+  # Calculate concordance on test data
+  c_index <- survConcordance(Surv(test_data$time, test_data$status) ~ predict(fit, newdata = test_data), data = test_data)$concordance
+  
+  return(c_index)
+}
+
+# Perform 5-fold cross-validation with stratification
+K <- 5
+folds <- createFolds(df$status, k = K, list = TRUE, returnTrain = TRUE)
+cv_c_indices <- sapply(folds, function(train_indices) {
+  train_data <- df[train_indices, ]
+  test_data <- df[-train_indices, ]
+  cox_cindex(train_data, test_data) # use the concordance function inside cox_cindex
+})
+
+# Print cross-validated c-indices
+
+```
+
+```{r}
+#| echo: False
+#| message: false
+#| warning: false
+#| include: True
+
+
+cat("Original c-index:", c_index_original$concordance, "\n")
+cat("Mean cross-validated c-Index:", mean(cv_c_indices), "\n")
+
+# plot cross-validation c-indices
+plot(cv_c_indices, type = "b", xlab = "Fold", ylab = "c-index", main = "c-index across folds")
+
+```
+
+## Conclusions
 
 ## References
 
