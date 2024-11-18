@@ -1,5 +1,5 @@
 ---
-title: "Cox Regression Review"
+title: "Survival of the Fittest: Cox Regression"
 subtitle: "Capstone 6940"
 author: "Hazardous Conditions"
 execute:
@@ -9,20 +9,24 @@ execute:
   error: false
 format: 
   revealjs:
+    css: custom.css
     theme: moon
 bibliography: references.bib
 csl: ieee.csl
 embed-resources: true
 slide-number: false
-width: 1600
-height: 900
+width: 1920
+height: 1080
 df-print: paged
 html-math-method: katex
 editor: visual
 pdf-separate-fragments: true
 fig-align: center
 ---
-
+h1.title {
+  background-image: ~/IDC6940 Capstone/IDC6940_hazardousconditions/docs/sotf_cap.png ;
+  
+}
  .reveal #refs {
           font-size: 0.8em;
     }
