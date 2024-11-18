@@ -908,7 +908,7 @@ c_index_m0 <- concordance(m0)
 
 ```
 
-## Model 2: Univariate model
+## Model 2: Univariate Model
 
 ```{r}
 #| echo: False
@@ -942,7 +942,7 @@ gt_table <- as_gt(summary_table) %>%
 gt_table
 ```
 
-## Model 3: All predictors
+## Model 3: All Predictors
 
 ```{r}
 #| echo: False
@@ -975,7 +975,7 @@ gt_table <- as_gt(summary_table) %>%
 gt_table
 ```
 
-## Model 4: Step-wise Selected variables
+## Model 4: Step-wise Selected Variables
 
 ```{r}
 #| echo: False
