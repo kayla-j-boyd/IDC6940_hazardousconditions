@@ -1308,7 +1308,7 @@ plot(cv_c_indices, type = "b", xlab = "Fold", ylab = "c-index", main = "c-index 
 
 -   Treatment with Levamisole + 5-FU decreases the hazard of death from colon cancer by 29.5% (HR =0.71, 95% CI: 0.56-0.89; p=0.0035).\
 -   Having more than 4 tumor positive lymph nodes significantly increases the hazard of death by 150.3% (p \<0.0001).\
--   Having a long wait period from surgery to registration for trial is associated with an increase in the hazard by 99.5% (p=0.01).\
+-   Having a long wait period from surgery to registration for trial is associated with an increase in the hazard by 29.5% (p=0.01).\
 -   Patients with local tumor spread to the submucosa, muscle and serosa have a reduction in the hazard by 76% (p=.0007), 66% (\<0.001), and 43% (0.004), respectively, compared to those with contiguous organ spread.\
 -   The concordance of the model (0.67) indicates moderate predictive accuracy for survival time.\
 -   Other variables that were not included in the study may contribute to survival time.
