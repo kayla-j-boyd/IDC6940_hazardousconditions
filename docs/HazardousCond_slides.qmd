@@ -11,6 +11,8 @@ format:
   revealjs:
     scrollable: true
     theme: moon
+    code-fold: true
+    code-summary: "Show Code"
 bibliography: references.bib
 csl: ieee.csl
 embed-resources: true
