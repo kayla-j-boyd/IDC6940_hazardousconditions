@@ -137,65 +137,6 @@ Data Source: [Employee Turnover Data from Kaggle](https://www.kaggle.com/dataset
 
 ## Data Preprocessing
 
-```{r}
-
-library(readr)
-turnover <- read_csv("turnover.csv")
-View(turnover)
-
-library(tidyverse) 
-library(dplyr)
-library(corrplot)
-library(RColorBrewer)
-library(ggfortify)
-library(riskRegression)
-library(survival)
-library(stringr)
-library(zoo)
-library(ranger)
-library(ggplot2)
-library(readxl)
-library(MASS)
-library(ADGofTest)
-library(survminer)
-library(car)
-
-# Check for null and duplicate values
-
-cat("Number of missing values :", sum(is.na(turnover)))
-cat("Number of duplicates: ", turnover %>%
-    duplicated() %>%
-    sum())
-# Remove duplicate values
-
-turnover <- unique(turnover)
-
-# Check distribution of data
-
-turnover %>%
-  ggplot(aes(x = stag, color = factor(event),
-                              fill = factor(event))) +
-  geom_histogram(aes(y = ..density..), alpha = 0.5) +
-  geom_density(alpha = 0.05) + scale_color_brewer(palette = "Dark2") +
-  scale_fill_brewer(palette = "Dark2") + theme_minimal() + 
-  theme(legend.position = "top")
-
-# Check for censored observations
-
-n <- dim(turnover)[1]
-cat((n - sum(turnover$event))/n * 100, "% of observations are censored")
-
-# Separate variable based on type
-
-NUM_COLS <- c("stag", "age", "extraversion", "independ", "selfcontrol", "anxiety", "novator")
-CAT_COLS <- c("gender", "industry", "profession", "traffic", "coach", "head_gender", "greywage", "way")
-
-# Transform CAT_COLS into categorical type
-
-    for (COL in CAT_COLS){
-    turnover[COL] <- turnover[COL] %>% unlist() %>% factor()}
-```
-
 ```{r, warning=FALSE, echo=F, message=FALSE}
 
 library(readr)
