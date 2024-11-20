@@ -137,8 +137,7 @@ Data Source: [Employee Turnover Data from Kaggle](https://www.kaggle.com/dataset
 
 ## Data Preprocessing
 
-``` r
-{r, warning=FALSE, echo=F, message=FALSE}
+```{r}
 
 library(readr)
 turnover <- read_csv("turnover.csv")
@@ -1320,7 +1319,7 @@ plot(cv_c_indices, type = "b", xlab = "Fold", ylab = "c-index", main = "c-index 
 # Predictors
 
 |  |  |
-|:----------------------|:------------------------------------------------|
+|:----------------------|:-----------------------------------------------|
 | id: | id |
 | study: | 1 for all patients |
 | rx: | Treatment - Obs(ervation), Lev(amisole), Lev(amisole)+5-FU |
