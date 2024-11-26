@@ -28,35 +28,35 @@ The Cox Proportional Hazards Model, often referred to as Cox Regression, is a wi
 
 -   Handles Censoring: Censoring occurs when the event hasn’t occurred for some subjects by the end of the study. Cox Regression effectively accounts for this.
 
-## **Applications of Cox Regression**
+## Applications of Cox Regression
 
 Cox Regression is used across various fields to analyze survival data and event risks:
 
-### **Healthcare and Epidemiology**
+### Healthcare and Epidemiology
 
 -   Studying survival rates in patients (e.g., cancer or heart disease).
 
 -   Evaluating the effect of treatments, such as comparing drug efficacy [@Hosmer2008].
 
-### **Business and Economics**
+### Business and Economics
 
 -   Predicting customer churn or employee turnover.
 
 -   Analyzing time to equipment failure in operational systems.
 
-### **Engineering and Reliability**
+### Engineering and Reliability
 
 -   Modeling the lifespan of mechanical systems or components.
 
 -   Assessing risks in failure times of industrial systems.
 
-### **Social Sciences**
+### Social Sciences
 
 -   Examining time until marriage, job changes, or retirement.
 
 -   Investigating relapse rates in criminology studies.
 
-## **Limitations of Cox Regression**
+## Limitations of Cox Regression
 
 While Cox Regression is versatile, it has limitations:
 
@@ -230,7 +230,7 @@ We can see that our data is skewed heavily to the right, we have no null values,
 
 Now we will take a look at our covariates and separate them based on whether they are discrete or continuous in order to better visualize the distributions.
 
-```{r}
+```{r, message=FALSE}
 # Separate variable based on type
 
 NUM_COLS <- c("stag", "age", "extraversion", "independ", "selfcontrol", "anxiety", "novator")
@@ -244,7 +244,7 @@ CAT_COLS <- c("gender", "industry", "profession", "traffic", "coach", "head_gend
 
 ### Categorical Covariates
 
-```{r}
+```{r, message=FALSE}
 # Categorical covariates
 
 # Selection of covariates (that are only discrete)
@@ -252,57 +252,333 @@ turnover.cat <- turnover %>%
                 select_if(is.factor) %>% 
                 mutate(event = turnover$event)
 
-g1 <- turnover.cat %>% ggplot(aes(x = gender, color = factor(event),
+turnover.cat %>% ggplot(aes(x = gender, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) +
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g2 <- turnover.cat %>% ggplot(aes(x = industry, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = industry, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g3 <-turnover.cat %>% ggplot(aes(x = profession, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = profession, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g4 <- turnover.cat %>% ggplot(aes(x = traffic, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = traffic, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g5 <-turnover.cat %>% ggplot(aes(x = coach, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = coach, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g6 <- turnover.cat %>% ggplot(aes(x = head_gender, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = head_gender, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g7 <- turnover.cat %>% ggplot(aes(x = greywage, color = factor(event),
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = greywage, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
-g8 <- turnover.cat %>% ggplot(aes(x = way, color = factor(event), 
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+turnover.cat %>% ggplot(aes(x = way, color = factor(event), 
                                      fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top")
+  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
 
-plot_grid(g1, g2, g3, g4, g5, g6, g7, g8, 
-          labels = c ("Gender", "Industry", "Profession", "Traffic", "Coach", "Coach Gender", "Grey Wage", "Method of Transport"),
-          ncol = 2, nrow = 4)
+
 ```
+
+### Continuous Covariates
+
+```{r, message=FALSE}
+# Continuous covariates
+turnover %>% ggplot(aes(x = stag, color = factor(event), 
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) +  
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = event, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = age, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = extraversion, color = factor(event), 
+                        fill = factor(event))) + 
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) + scale_color_brewer(palette = "Dark2") + 
+  scale_fill_brewer(palette = "Dark2") + theme_minimal() + 
+  theme(legend.position = "top")
+turnover %>% ggplot(aes(x = independ, color = factor(event), 
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) + 
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") + 
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = selfcontrol, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = anxiety, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+turnover %>% ggplot(aes(x = novator, color = factor(event),
+                        fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+```
+
+From the visualizations, we can see a few variables that might contribute to employee turnover based on their distributions. Below are the observations:
+
+-   Gender, profession, and way seem to be significant factor given the structure of distribution.
+
+-   We can see our event (termination) occurs almost evenly throughout our dataset.
+
+-   Age and stag are heavily right-skewed, most employees being under 40 and tenure being less than 5 years.
+
+Before we move on we need to plot the Kaplan-Meier Survival Plots to ensure we meet the assumption of proportional hazards.
+
+### Proportional Hazards Assumption
+
+#### Gender
+
+```{r}
+km_gender<-survfit(Surv(stag, event)~gender, data = turnover, type="kaplan-meier")
+
+ggsurvplot(km_gender, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("female", "male"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Gender")
+```
+
+#### Industry
+
+```{r}
+km_industry<-survfit(Surv(stag, event)~industry, data = turnover, type ="kaplan-meier")
+ggsurvplot(km_industry, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Industry")
+
+```
+
+#### Profession
+
+```{r}
+km_profession<-survfit(Surv(stag, event)~profession, data = turnover, type="kaplan-meier")
+ggsurvplot(km_profession, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Profession")
+```
+
+#### Traffic
+
+```{r}
+km_traffic<-survfit(Surv(stag, event)~traffic, data= turnover, type="kaplan-meier")
+ggsurvplot(km_traffic, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Traffic")
+```
+
+#### Coach
+
+```{r}
+km_coach<-survfit(Surv(stag, event)~coach, data = turnover, type="kaplan-meier")
+ggsurvplot(km_coach, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Coach")
+```
+
+#### Head_gender
+
+```{r}
+km_headgender<-survfit(Surv(stag, event)~head_gender, data= turnover, type="kaplan-meier")
+ggsurvplot(km_headgender, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("female", "male"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Head Gender")
+```
+
+#### Greywage
+
+```{r}
+km_greywage<-survfit(Surv(stag, event)~greywage, data = turnover, type ="kaplan-meier")
+ggsurvplot(km_greywage, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs = c("grey", "white"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Greywage")
+```
+
+#### Way
+
+```{r}
+km_way<-survfit(Surv(stag, event)~way,
+                data= turnover,
+                type="kaplan-meier")
+ggsurvplot(km_way, data=turnover,
+           conf.int = FALSE,
+           ggtheme = theme_minimal(),
+           legend.labs=c("bus", "car", "foot"),
+           pval = TRUE,
+           pval.method = TRUE)+
+  ggtitle("Survival curve based on Commuters(way)")
+```
+
+Based on the above survival curve plots, we conclude that the *gender, coach*, and *head_gender* variables do not meet the assumption of proportional hazards.
 
 ## Statistical Modeling
 
+### Crude Model
+
+```{r}
+model0<-coxph(Surv(stag, event)~.,
+                 data = turnover)
+summary(model0)
+```
+
+### Refining the Model
+
+We want to refine the model to use the independent variable(s) with the greatest influence from our crude model. To do this, we will use the "step" function in R which iteratively adds or removes variables based on a chosen criterion. For this model we will use the AIC value. The Akaike Information Criterion (AIC) is a statistical metric that evaluates how well a model fits a given set of data.
+
+```{r}
+step(model0)
+```
+
+Using these results, we can see that the model including independent variables *age, industry, profession, traffic, greywage, selfcontrol*, and *anxiety* produced the most accurate survival model. We will use these variables in our adjusted model.
+
+### Adjusted Model
+
+```{r}
+model1<-coxph(Surv(stag, event)~age + industry + profession + traffic + greywage + way + selfcontrol + anxiety,
+                data = turnover)
+summary(model1)
+```
+
+### Hazard Ratios
+
+Hazard ratios above 1 indicate a higher likelihood of the individuals in that category to experience the event (termination) in the given timeframe.
+
+```{r}
+hr=exp(model1$coefficients)
+hr
+```
+
+Our results show that age increases the likelihood of employee turnover, as well as certain professions such as Commercial, Engineering, and PR.
+
 ## Results
 
+|   | Crude Model | Adjusted Model |
+|-----------------------|:----------------------:|:----------------------:|
+| Covariate | Hazard ratio (95% CI), p-value | Hazard ratio (95% CI), p-value |
+| genderm | (0.70, 1.15) 0.384 | Excluded |
+| **age** | **(1.01, 1.04) 0.002** | **(1.01, 1.03) 0.001** |
+| industryBanks | (0.39, 1.64) 0.537 | (0.37, 1.52) 0.424 |
+| industryBuilding | (0.37, 1.73) 0.562 | (0.36, 1.64) 0.494 |
+| industryConsult | (0.32, 1.42) 0.304 | (0.31, 1.31) 0.215 |
+| industryetc | (0.27, 1.18) 0.128 | (0.25, 1.08) 0.080 |
+| industryHoReCa | (0.18, 1.53) 0.239 | (0.16, 1.32) 0.149 |
+| **industryIT** | **(0.14, 0.66) 0.002** | **(0.13, 0.61) 0.001** |
+| **industrymanufacture** | **(0.22, 0.94) 0.032** | **(0.20, 0.85) 0.016** |
+| industryMining | (0.23, 1.32) 0.179 | (0.21,1.23) 0.136 |
+| **industryPharma** | **(0.14, 0.94) 0.036** | **(0.14, 0.89) 0.027** |
+| **industryPowerGeneration** | **(0.15, 0.86) 0.022** | **(0.14, 0.80) 0.013** |
+| **industryRealEstate** | **(0.06, 0.56) 0.003** | **(0.05, 0.51) 0.001** |
+| **industryRetail** | **(0.17, 0.72) 0.004** | **(0.16, 0.66) 0.002** |
+| industryState | (0.23,1.15) 0.104 | (0.22, 1.05) 0.066 |
+| **industryTelecom** | **(0.13, 0.73) 0.008** | **(0.12, 0.67) 0.004** |
+| **industrytransport** | **(0.18, 0.99) 0.046** | **(0.18, 0.96) 0.041** |
+| professionBusinessDevelopment | (0.67, 4.94) 0.237 | (0.68, 4.83) 0.238 |
+| **professionCommercial** | **(1.00, 7.34) 0.049** | **(1.03, 7.27) 0.043** |
+| professionConsult | (0.64, 4.91) 0.272 | (0.64, 4.70) 0.281 |
+| professionEngineer | (0.94, 7.80) 0.063 | (0.92, 7.22) 0.072 |
+| professionetc | (0.63, 4.22) 0.317 | (0.61, 4.07) 0.343 |
+| professionFinance | (0.377, 2.96) 0.917 | (0.38, 2.92) 0.910 |
+| professionHR | (0.53, 2.84) 0.638 | (0.54, 2.87) 0.603 |
+| professionIT | (0.41, 2.81) 0.887 | (0.41, 2.61) 0.951 |
+| professionLaw | (0.42, 5.33) 0.533 | (0.39, 4.82) 0.621 |
+| **professionmanage** | **(1.36, 9.63) 0.010** | **(1.36, 9.57) 0.01** |
+| professionMarketing | (0.80, 5.32) 0.132 | (0.79, 5.16) 0.141 |
+| professionPR | (0.66, 8.17) 0.186 | (0.65, 7.95) 0.197 |
+| professionSales | (0.66, 4.15) 0.280 | (0.68, 4.06) 0.266 |
+| professionTeaching | (0.61, 5.66) 0.278 | (0.61, 5.70) 0.270 |
+| **trafficempjs** | **(1.37, 4.69) 0.003** | **(1.28, 4.32) 0.006** |
+| trafficfriends | (0.58, 2.21) 0.721 | (0.54, 2.00) 0.917 |
+| trafficKA | (0.58, 2.30) 0.688 | (0.56, 2.20) 0.769 |
+| trafficrabrecNErab | (0.94, 3.18) 0.077 | (0.89, 2.95) 0.115 |
+| trafficrecNErab | (0.45, 2.01) 0.893 | (0.42, 1.85) 0.736 |
+| trafficreferal | (0.76, 2.73) 0.257 | (0.72, 2.55) 0.337 |
+| **trafficyoujs** | **(1.05, 3.53) 0.034** | **(1.00, 3.33) 0.049** |
+| coachno | (0.85,1.316) 0.615 | Excluded |
+| coachyes | (0.92, 1.66) 0.164 | Excluded |
+| head_genderm | (0.86, 1.29) 0.590 | Excluded |
+| **greywagewhite** | **(0.46, 0.79) 0.0002** | **(0.46, 0.78) 0.0001** |
+| **waycar** | **(0.67, 1.00) 0.052** | **(0.66, 0.99) 0.039** |
+| **wayfoot** | **(0.48, 0.94) 0.020** | **(0.49, 0.96) 0.029** |
+| extraversion | (0.95, 1.09) 0.639 | Excluded |
+| independ | (0.91, 1.05) 0.587 | Excluded |
+| **selfcontrol** | **(0.89, 1.02) 0.202** | **(0.90, 0.98) 0.007** |
+| **anxiety** | **(0.89, 1.02) 0.158** | **(0.90, 1.00) 0.060** |
+| novator | (0.95, 1.07) 0.766 | Excluded |
+
+The model comparison confirms our findings and subsequent refining of the model to achieve the best fit. Variables that did not meet assumption for proportional hazards were excluded as well as variables that were found to be non-significant.
+
 ## Predictions
+
+We will now use our adjusted model to predict 3-year survival rates between two employees, one age 25 and one age 55. All other variables will remain the same.
+
+```{r}
+new_hire <- data.frame(age = c(25,55), industry = c("IT","IT"), stag= c(36, 36), event= c(0,0), profession = c("manage","manage"), traffic = c("empjs","empjs"), greywage = c("white","white"), way = c("car","car"), independ = c(5,5), selfcontrol = c(5,5), anxiety = c(5,5))
+
+preds <- predict(model1, newdata = new_hire, type = "survival", se.fit = TRUE)
+
+new_hire$prob <- preds$fit
+new_hire$lcl <- preds$fit - 1.96*preds$se.fit
+new_hire$ucl <- preds$fit + 1.96*preds$se.fit
+new_hire
+```
+Our results show a survival probability of 38% for the 25-year old, and 17% percent for the 55-year old.
 
 # Conclusion
 

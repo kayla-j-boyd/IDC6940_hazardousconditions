@@ -165,31 +165,31 @@ window.Quarto = {
 </ul>
 </section>
 <section id="applications-of-cox-regression" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="applications-of-cox-regression"><span class="header-section-number">1.2</span> <strong>Applications of Cox Regression</strong></h2>
+<h2 data-number="1.2" class="anchored" data-anchor-id="applications-of-cox-regression"><span class="header-section-number">1.2</span> Applications of Cox Regression</h2>
 <p>Cox Regression is used across various fields to analyze survival data and event risks:</p>
 <section id="healthcare-and-epidemiology" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="healthcare-and-epidemiology"><span class="header-section-number">1.2.1</span> <strong>Healthcare and Epidemiology</strong></h3>
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="healthcare-and-epidemiology"><span class="header-section-number">1.2.1</span> Healthcare and Epidemiology</h3>
 <ul>
 <li><p>Studying survival rates in patients (e.g., cancer or heart disease).</p></li>
 <li><p>Evaluating the effect of treatments, such as comparing drug efficacy <span class="citation" data-cites="Hosmer2008"><a href="#ref-Hosmer2008" role="doc-biblioref">[2]</a></span>.</p></li>
 </ul>
 </section>
 <section id="business-and-economics" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="business-and-economics"><span class="header-section-number">1.2.2</span> <strong>Business and Economics</strong></h3>
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="business-and-economics"><span class="header-section-number">1.2.2</span> Business and Economics</h3>
 <ul>
 <li><p>Predicting customer churn or employee turnover.</p></li>
 <li><p>Analyzing time to equipment failure in operational systems.</p></li>
 </ul>
 </section>
 <section id="engineering-and-reliability" class="level3" data-number="1.2.3">
-<h3 data-number="1.2.3" class="anchored" data-anchor-id="engineering-and-reliability"><span class="header-section-number">1.2.3</span> <strong>Engineering and Reliability</strong></h3>
+<h3 data-number="1.2.3" class="anchored" data-anchor-id="engineering-and-reliability"><span class="header-section-number">1.2.3</span> Engineering and Reliability</h3>
 <ul>
 <li><p>Modeling the lifespan of mechanical systems or components.</p></li>
 <li><p>Assessing risks in failure times of industrial systems.</p></li>
 </ul>
 </section>
 <section id="social-sciences" class="level3" data-number="1.2.4">
-<h3 data-number="1.2.4" class="anchored" data-anchor-id="social-sciences"><span class="header-section-number">1.2.4</span> <strong>Social Sciences</strong></h3>
+<h3 data-number="1.2.4" class="anchored" data-anchor-id="social-sciences"><span class="header-section-number">1.2.4</span> Social Sciences</h3>
 <ul>
 <li><p>Examining time until marriage, job changes, or retirement.</p></li>
 <li><p>Investigating relapse rates in criminology studies.</p></li>
@@ -197,7 +197,7 @@ window.Quarto = {
 </section>
 </section>
 <section id="limitations-of-cox-regression" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="limitations-of-cox-regression"><span class="header-section-number">1.3</span> <strong>Limitations of Cox Regression</strong></h2>
+<h2 data-number="1.3" class="anchored" data-anchor-id="limitations-of-cox-regression"><span class="header-section-number">1.3</span> Limitations of Cox Regression</h2>
 <p>While Cox Regression is versatile, it has limitations:</p>
 <ol type="1">
 <li><p><strong>Proportional Hazards Assumption</strong>:</p>
@@ -495,50 +495,11 @@ window.Quarto = {
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select_if</span>(is.factor) <span class="sc">%&gt;%</span> </span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="at">event =</span> turnover<span class="sc">$</span>event)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>g1 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
 <span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
 <span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>g2 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> industry, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>g3 <span class="ot">&lt;-</span>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> profession, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>g4 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> traffic, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>g5 <span class="ot">&lt;-</span>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> coach, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>g6 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> head_gender, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>g7 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> greywage, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>g8 <span class="ot">&lt;-</span> turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> way, <span class="at">color =</span> <span class="fu">factor</span>(event), </span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_grid</span>(g1, g2, g3, g4, g5, g6, g7, g8, </span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>          <span class="at">labels =</span> <span class="fu">c</span> (<span class="st">"Gender"</span>, <span class="st">"Industry"</span>, <span class="st">"Profession"</span>, <span class="st">"Traffic"</span>, <span class="st">"Coach"</span>, <span class="st">"Coach Gender"</span>, <span class="st">"Grey Wage"</span>, <span class="st">"Method of Transport"</span>),</span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>          <span class="at">ncol =</span> <span class="dv">2</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -547,17 +508,1228 @@ window.Quarto = {
 </figure>
 </div>
 </div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> industry, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> profession, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> traffic, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> coach, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> head_gender, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> greywage, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>                            <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>turnover.cat <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> way, <span class="at">color =</span> <span class="fu">factor</span>(event), </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">panel.spacing.x =</span> <span class="fu">unit</span>(<span class="dv">30</span>, <span class="st">"mm"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-5-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="continuous-covariates" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="continuous-covariates"><span class="header-section-number">3.2.2</span> Continuous Covariates</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Continuous covariates</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> stag, <span class="at">color =</span> <span class="fu">factor</span>(event), </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span>  </span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> event, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> extraversion, <span class="at">color =</span> <span class="fu">factor</span>(event), </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">theme_minimal</span>() <span class="sc">+</span> </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> independ, <span class="at">color =</span> <span class="fu">factor</span>(event), </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> </span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> selfcontrol, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-6.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> anxiety, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-7.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>turnover <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> novator, <span class="at">color =</span> <span class="fu">factor</span>(event),</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">fill =</span> <span class="fu">factor</span>(event))) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> ..density..), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.05</span>) <span class="sc">+</span> </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span> <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-6-8.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>From the visualizations, we can see a few variables that might contribute to employee turnover based on their distributions. Below are the observations:</p>
+<ul>
+<li><p>Gender, profession, and way seem to be significant factor given the structure of distribution.</p></li>
+<li><p>We can see our event (termination) occurs almost evenly throughout our dataset.</p></li>
+<li><p>Age and stag are heavily right-skewed, most employees being under 40 and tenure being less than 5 years.</p></li>
+</ul>
+<p>Before we move on we need to plot the Kaplan-Meier Survival Plots to ensure we meet the assumption of proportional hazards.</p>
+</section>
+<section id="proportional-hazards-assumption" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="proportional-hazards-assumption"><span class="header-section-number">3.2.3</span> Proportional Hazards Assumption</h3>
+<section id="gender" class="level4" data-number="3.2.3.1">
+<h4 data-number="3.2.3.1" class="anchored" data-anchor-id="gender"><span class="header-section-number">3.2.3.1</span> Gender</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>km_gender<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>gender, <span class="at">data =</span> turnover, <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_gender, <span class="at">data=</span>turnover,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="industry" class="level4" data-number="3.2.3.2">
+<h4 data-number="3.2.3.2" class="anchored" data-anchor-id="industry"><span class="header-section-number">3.2.3.2</span> Industry</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>km_industry<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>industry, <span class="at">data =</span> turnover, <span class="at">type =</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_industry, <span class="at">data=</span>turnover,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Industry"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="profession" class="level4" data-number="3.2.3.3">
+<h4 data-number="3.2.3.3" class="anchored" data-anchor-id="profession"><span class="header-section-number">3.2.3.3</span> Profession</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>km_profession<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>profession, <span class="at">data =</span> turnover, <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_profession, <span class="at">data=</span>turnover,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Profession"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="traffic" class="level4" data-number="3.2.3.4">
+<h4 data-number="3.2.3.4" class="anchored" data-anchor-id="traffic"><span class="header-section-number">3.2.3.4</span> Traffic</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>km_traffic<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>traffic, <span class="at">data=</span> turnover, <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_traffic, <span class="at">data=</span>turnover,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Traffic"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="coach" class="level4" data-number="3.2.3.5">
+<h4 data-number="3.2.3.5" class="anchored" data-anchor-id="coach"><span class="header-section-number">3.2.3.5</span> Coach</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>km_coach<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>coach, <span class="at">data =</span> turnover, <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_coach, <span class="at">data=</span>turnover,</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Coach"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="head_gender" class="level4" data-number="3.2.3.6">
+<h4 data-number="3.2.3.6" class="anchored" data-anchor-id="head_gender"><span class="header-section-number">3.2.3.6</span> Head_gender</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>km_headgender<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>head_gender, <span class="at">data=</span> turnover, <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_headgender, <span class="at">data=</span>turnover,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">"female"</span>, <span class="st">"male"</span>),</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Head Gender"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="greywage" class="level4" data-number="3.2.3.7">
+<h4 data-number="3.2.3.7" class="anchored" data-anchor-id="greywage"><span class="header-section-number">3.2.3.7</span> Greywage</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>km_greywage<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>greywage, <span class="at">data =</span> turnover, <span class="at">type =</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_greywage, <span class="at">data=</span>turnover,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs =</span> <span class="fu">c</span>(<span class="st">"grey"</span>, <span class="st">"white"</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Greywage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="way" class="level4" data-number="3.2.3.8">
+<h4 data-number="3.2.3.8" class="anchored" data-anchor-id="way"><span class="header-section-number">3.2.3.8</span> Way</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>km_way<span class="ot">&lt;-</span><span class="fu">survfit</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>way,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data=</span> turnover,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                <span class="at">type=</span><span class="st">"kaplan-meier"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_way, <span class="at">data=</span>turnover,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">conf.int =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">ggtheme =</span> <span class="fu">theme_minimal</span>(),</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">legend.labs=</span><span class="fu">c</span>(<span class="st">"bus"</span>, <span class="st">"car"</span>, <span class="st">"foot"</span>),</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">pval.method =</span> <span class="cn">TRUE</span>)<span class="sc">+</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Survival curve based on Commuters(way)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coxregression_paper_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Based on the above survival curve plots, we conclude that the <em>gender, coach</em>, and <em>head_gender</em> variables do not meet the assumption of proportional hazards.</p>
+</section>
 </section>
 </section>
 <section id="statistical-modeling" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="statistical-modeling"><span class="header-section-number">3.3</span> Statistical Modeling</h2>
+<section id="crude-model" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="crude-model"><span class="header-section-number">3.3.1</span> Crude Model</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>model0<span class="ot">&lt;-</span><span class="fu">coxph</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>.,</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> turnover)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(stag, event) ~ ., data = turnover)
+
+  n= 1116, number of events= 560 
+
+                                   coef exp(coef)  se(coef)      z Pr(&gt;|z|)    
+genderm                       -0.110567  0.895327  0.127236 -0.869 0.384855    
+age                            0.021321  1.021550  0.006992  3.050 0.002292 ** 
+industryBanks                 -0.228597  0.795649  0.370386 -0.617 0.537112    
+industryBuilding              -0.228859  0.795441  0.394945 -0.579 0.562272    
+industryConsult               -0.387826  0.678530  0.378031 -1.026 0.304934    
+industryetc                   -0.571840  0.564486  0.376067 -1.521 0.128365    
+industryHoReCa                -0.641488  0.526508  0.545700 -1.176 0.239782    
+industryIT                    -1.188633  0.304637  0.392874 -3.025 0.002482 ** 
+industrymanufacture           -0.799654  0.449484  0.373800 -2.139 0.032415 *  
+industryMining                -0.603336  0.546984  0.449444 -1.342 0.179465    
+industryPharma                -1.005353  0.365916  0.480887 -2.091 0.036562 *  
+industryPowerGeneration       -1.032475  0.356124  0.451676 -2.286 0.022261 *  
+industryRealEstate            -1.725592  0.178068  0.588426 -2.933 0.003362 ** 
+industryRetail                -1.042228  0.352668  0.363732 -2.865 0.004165 ** 
+industryState                 -0.667077  0.513206  0.410168 -1.626 0.103875    
+industryTelecom               -1.186918  0.305160  0.448385 -2.647 0.008119 ** 
+industrytransport             -0.852135  0.426504  0.427996 -1.991 0.046482 *  
+professionBusinessDevelopment  0.600890  1.823741  0.508792  1.181 0.237597    
+professionCommercial           0.998866  2.715201  0.507452  1.968 0.049022 *  
+professionConsult              0.570631  1.769384  0.520478  1.096 0.272921    
+professionEngineer             0.998848  2.715151  0.538726  1.854 0.063726 .  
+professionetc                  0.486204  1.626132  0.486495  0.999 0.317600    
+professionFinance              0.054707  1.056231  0.526353  0.104 0.917220    
+professionHR                   0.202198  1.224091  0.429582  0.471 0.637865    
+professionIT                   0.069725  1.072213  0.491667  0.142 0.887228    
+professionLaw                  0.403392  1.496894  0.647872  0.623 0.533520    
+professionmanage               1.284135  3.611541  0.500159  2.567 0.010245 *  
+professionMarketing            0.726077  2.066956  0.482551  1.505 0.132411    
+professionPR                   0.846313  2.331035  0.640073  1.322 0.186097    
+professionSales                0.505293  1.657472  0.467728  1.080 0.280002    
+professionTeaching             0.617169  1.853673  0.569441  1.084 0.278446    
+trafficempjs                   0.928219  2.529999  0.314661  2.950 0.003179 ** 
+trafficfriends                 0.122161  1.129937  0.342264  0.357 0.721151    
+trafficKA                      0.141661  1.152186  0.353556  0.401 0.688659    
+trafficrabrecNErab             0.548112  1.729984  0.310084  1.768 0.077124 .  
+trafficrecNErab               -0.051263  0.950029  0.381447 -0.134 0.893095    
+trafficreferal                 0.368137  1.445041  0.325262  1.132 0.257711    
+trafficyoujs                   0.654608  1.924387  0.309447  2.115 0.034395 *  
+coachno                        0.056040  1.057640  0.111493  0.503 0.615221    
+coachyes                       0.211061  1.234988  0.151771  1.391 0.164329    
+head_genderm                   0.055167  1.056717  0.102616  0.538 0.590846    
+greywagewhite                 -0.505741  0.603059  0.135383 -3.736 0.000187 ***
+waycar                        -0.201625  0.817401  0.103831 -1.942 0.052153 .  
+wayfoot                       -0.402833  0.668424  0.174165 -2.313 0.020726 *  
+extraversion                   0.016623  1.016761  0.035460  0.469 0.639236    
+independ                      -0.019380  0.980806  0.035771 -0.542 0.587962    
+selfcontrol                   -0.045743  0.955287  0.035878 -1.275 0.202321    
+anxiety                       -0.048800  0.952372  0.034633 -1.409 0.158827    
+novator                        0.009108  1.009150  0.030631  0.297 0.766196    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                              exp(coef) exp(-coef) lower .95 upper .95
+genderm                          0.8953     1.1169    0.6977    1.1489
+age                              1.0216     0.9789    1.0076    1.0356
+industryBanks                    0.7956     1.2568    0.3850    1.6444
+industryBuilding                 0.7954     1.2572    0.3668    1.7250
+industryConsult                  0.6785     1.4738    0.3234    1.4235
+industryetc                      0.5645     1.7715    0.2701    1.1797
+industryHoReCa                   0.5265     1.8993    0.1807    1.5343
+industryIT                       0.3046     3.2826    0.1410    0.6580
+industrymanufacture              0.4495     2.2248    0.2160    0.9352
+industryMining                   0.5470     1.8282    0.2267    1.3199
+industryPharma                   0.3659     2.7329    0.1426    0.9391
+industryPowerGeneration          0.3561     2.8080    0.1469    0.8631
+industryRealEstate               0.1781     5.6158    0.0562    0.5642
+industryRetail                   0.3527     2.8355    0.1729    0.7194
+industryState                    0.5132     1.9485    0.2297    1.1466
+industryTelecom                  0.3052     3.2770    0.1267    0.7348
+industrytransport                0.4265     2.3446    0.1843    0.9868
+professionBusinessDevelopment    1.8237     0.5483    0.6728    4.9436
+professionCommercial             2.7152     0.3683    1.0043    7.3408
+professionConsult                1.7694     0.5652    0.6380    4.9074
+professionEngineer               2.7152     0.3683    0.9446    7.8047
+professionetc                    1.6261     0.6150    0.6267    4.2195
+professionFinance                1.0562     0.9468    0.3765    2.9634
+professionHR                     1.2241     0.8169    0.5274    2.8410
+professionIT                     1.0722     0.9327    0.4090    2.8105
+professionLaw                    1.4969     0.6681    0.4205    5.3292
+professionmanage                 3.6115     0.2769    1.3551    9.6256
+professionMarketing              2.0670     0.4838    0.8028    5.3221
+professionPR                     2.3310     0.4290    0.6648    8.1730
+professionSales                  1.6575     0.6033    0.6627    4.1455
+professionTeaching               1.8537     0.5395    0.6072    5.6590
+trafficempjs                     2.5300     0.3953    1.3655    4.6877
+trafficfriends                   1.1299     0.8850    0.5777    2.2100
+trafficKA                        1.1522     0.8679    0.5762    2.3039
+trafficrabrecNErab               1.7300     0.5780    0.9421    3.1768
+trafficrecNErab                  0.9500     1.0526    0.4498    2.0064
+trafficreferal                   1.4450     0.6920    0.7639    2.7337
+trafficyoujs                     1.9244     0.5196    1.0493    3.5293
+coachno                          1.0576     0.9455    0.8500    1.3160
+coachyes                         1.2350     0.8097    0.9172    1.6628
+head_genderm                     1.0567     0.9463    0.8642    1.2921
+greywagewhite                    0.6031     1.6582    0.4625    0.7863
+waycar                           0.8174     1.2234    0.6669    1.0019
+wayfoot                          0.6684     1.4961    0.4751    0.9404
+extraversion                     1.0168     0.9835    0.9485    1.0899
+independ                         0.9808     1.0196    0.9144    1.0520
+selfcontrol                      0.9553     1.0468    0.8904    1.0249
+anxiety                          0.9524     1.0500    0.8899    1.0193
+novator                          1.0092     0.9909    0.9503    1.0716
+
+Concordance= 0.661  (se = 0.012 )
+Likelihood ratio test= 173.8  on 49 df,   p=7e-16
+Wald test            = 176.7  on 49 df,   p=3e-16
+Score (logrank) test = 183.5  on 49 df,   p=&lt;2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="refining-the-model" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="refining-the-model"><span class="header-section-number">3.3.2</span> Refining the Model</h3>
+<p>We want to refine the model to use the independent variable(s) with the greatest influence from our crude model. To do this, we will use the “step” function in R which iteratively adds or removes variables based on a chosen criterion. For this model we will use the AIC value. The Akaike Information Criterion (AIC) is a statistical metric that evaluates how well a model fits a given set of data.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(model0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Start:  AIC=6717.67
+Surv(stag, event) ~ gender + age + industry + profession + traffic + 
+    coach + head_gender + greywage + way + extraversion + independ + 
+    selfcontrol + anxiety + novator
+
+               Df    AIC
+- coach         2 6715.6
+- novator       1 6715.8
+- extraversion  1 6715.9
+- head_gender   1 6716.0
+- independ      1 6716.0
+- gender        1 6716.4
+- selfcontrol   1 6717.3
+- anxiety       1 6717.7
+&lt;none&gt;            6717.7
+- profession   14 6720.5
+- way           2 6721.8
+- age           1 6724.8
+- greywage      1 6728.3
+- traffic       7 6741.6
+- industry     15 6746.9
+
+Step:  AIC=6715.58
+Surv(stag, event) ~ gender + age + industry + profession + traffic + 
+    head_gender + greywage + way + extraversion + independ + 
+    selfcontrol + anxiety + novator
+
+               Df    AIC
+- novator       1 6713.8
+- head_gender   1 6713.8
+- extraversion  1 6713.8
+- independ      1 6713.9
+- gender        1 6714.3
+- selfcontrol   1 6715.2
+&lt;none&gt;            6715.6
+- anxiety       1 6715.7
+- profession   14 6718.8
+- way           2 6719.2
+- age           1 6722.8
+- greywage      1 6726.4
+- traffic       7 6739.4
+- industry     15 6746.4
+
+Step:  AIC=6713.76
+Surv(stag, event) ~ gender + age + industry + profession + traffic + 
+    head_gender + greywage + way + extraversion + independ + 
+    selfcontrol + anxiety
+
+               Df    AIC
+- extraversion  1 6712.1
+- head_gender   1 6712.1
+- independ      1 6712.1
+- gender        1 6712.5
+- anxiety       1 6713.7
+&lt;none&gt;            6713.8
+- selfcontrol   1 6714.5
+- profession   14 6716.9
+- way           2 6717.3
+- age           1 6721.1
+- greywage      1 6724.4
+- traffic       7 6737.5
+- industry     15 6744.5
+
+Step:  AIC=6712.05
+Surv(stag, event) ~ gender + age + industry + profession + traffic + 
+    head_gender + greywage + way + independ + selfcontrol + anxiety
+
+              Df    AIC
+- head_gender  1 6710.4
+- gender       1 6710.8
+- independ     1 6711.0
+&lt;none&gt;           6712.1
+- anxiety      1 6713.4
+- profession  14 6715.5
+- way          2 6715.6
+- selfcontrol  1 6717.3
+- age          1 6719.1
+- greywage     1 6722.5
+- traffic      7 6736.4
+- industry    15 6743.3
+
+Step:  AIC=6710.35
+Surv(stag, event) ~ gender + age + industry + profession + traffic + 
+    greywage + way + independ + selfcontrol + anxiety
+
+              Df    AIC
+- gender       1 6709.0
+- independ     1 6709.4
+&lt;none&gt;           6710.4
+- anxiety      1 6711.9
+- way          2 6713.9
+- profession  14 6714.1
+- selfcontrol  1 6715.9
+- age          1 6719.1
+- greywage     1 6720.9
+- traffic      7 6734.4
+- industry    15 6741.9
+
+Step:  AIC=6709
+Surv(stag, event) ~ age + industry + profession + traffic + greywage + 
+    way + independ + selfcontrol + anxiety
+
+              Df    AIC
+- independ     1 6708.2
+&lt;none&gt;           6709.0
+- anxiety      1 6711.7
+- profession  14 6712.1
+- way          2 6712.8
+- selfcontrol  1 6715.3
+- age          1 6717.6
+- greywage     1 6720.0
+- traffic      7 6733.2
+- industry    15 6740.7
+
+Step:  AIC=6708.17
+Surv(stag, event) ~ age + industry + profession + traffic + greywage + 
+    way + selfcontrol + anxiety
+
+              Df    AIC
+&lt;none&gt;           6708.2
+- anxiety      1 6709.7
+- profession  14 6710.9
+- way          2 6712.0
+- selfcontrol  1 6713.4
+- age          1 6716.1
+- greywage     1 6719.4
+- traffic      7 6732.4
+- industry    15 6739.6</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(stag, event) ~ age + industry + profession + 
+    traffic + greywage + way + selfcontrol + anxiety, data = turnover)
+
+                                  coef exp(coef) se(coef)      z        p
+age                            0.02055   1.02076  0.00641  3.205 0.001349
+industryBanks                 -0.28975   0.74845  0.36289 -0.798 0.424614
+industryBuilding              -0.26582   0.76658  0.38880 -0.684 0.494175
+industryConsult               -0.45691   0.63324  0.36927 -1.237 0.215967
+industryetc                   -0.64403   0.52517  0.36896 -1.746 0.080890
+industryHoReCa                -0.77805   0.45930  0.54017 -1.440 0.149758
+industryIT                    -1.24814   0.28704  0.38553 -3.237 0.001206
+industrymanufacture           -0.87933   0.41506  0.36757 -2.392 0.016744
+industryMining                -0.65940   0.51716  0.44284 -1.489 0.136485
+industryPharma                -1.04233   0.35263  0.47232 -2.207 0.027324
+industryPowerGeneration       -1.09181   0.33561  0.44269 -2.466 0.013651
+industryRealEstate            -1.81850   0.16227  0.58090 -3.130 0.001745
+industryRetail                -1.10739   0.33042  0.35511 -3.118 0.001818
+industryState                 -0.73784   0.47814  0.40157 -1.837 0.066154
+industryTelecom               -1.25500   0.28508  0.43786 -2.866 0.004154
+industrytransport             -0.86358   0.42165  0.42212 -2.046 0.040775
+professionBusinessDevelopment  0.59092   1.80564  0.50153  1.178 0.238702
+professionCommercial           1.00727   2.73813  0.49840  2.021 0.043279
+professionConsult              0.54819   1.73012  0.50936  1.076 0.281828
+professionEngineer             0.94501   2.57284  0.52648  1.795 0.072662
+professionetc                  0.45756   1.58021  0.48289  0.948 0.343360
+professionFinance              0.05804   1.05976  0.51797  0.112 0.910784
+professionHR                   0.22086   1.24714  0.42463  0.520 0.602987
+professionIT                   0.02934   1.02978  0.47418  0.062 0.950654
+professionLaw                  0.31703   1.37304  0.64071  0.495 0.620736
+professionmanage               1.28255   3.60582  0.49774  2.577 0.009974
+professionMarketing            0.70287   2.01955  0.47822  1.470 0.141624
+professionPR                   0.82179   2.27458  0.63824  1.288 0.197889
+professionSales                0.50708   1.66044  0.45661  1.111 0.266774
+professionTeaching             0.62625   1.87058  0.56833  1.102 0.270502
+trafficempjs                   0.85644   2.35476  0.30998  2.763 0.005729
+trafficfriends                 0.03493   1.03555  0.33616  0.104 0.917244
+trafficKA                      0.10265   1.10810  0.34993  0.293 0.769274
+trafficrabrecNErab             0.48122   1.61805  0.30601  1.573 0.115817
+trafficrecNErab               -0.12679   0.88092  0.37753 -0.336 0.736996
+trafficreferal                 0.30802   1.36073  0.32125  0.959 0.337642
+trafficyoujs                   0.60301   1.82761  0.30666  1.966 0.049257
+greywagewhite                 -0.51396   0.59812  0.13401 -3.835 0.000125
+waycar                        -0.21103   0.80975  0.10259 -2.057 0.039682
+wayfoot                       -0.37776   0.68539  0.17333 -2.179 0.029301
+selfcontrol                   -0.06082   0.94099  0.02269 -2.680 0.007353
+anxiety                       -0.04924   0.95196  0.02619 -1.880 0.060130
+
+Likelihood ratio test=169.3  on 42 df, p=&lt; 2.2e-16
+n= 1116, number of events= 560 </code></pre>
+</div>
+</div>
+<p>Using these results, we can see that the model including independent variables <em>age, industry, profession, traffic, greywage, selfcontrol</em>, and <em>anxiety</em> produced the most accurate survival model. We will use these variables in our adjusted model.</p>
+</section>
+<section id="adjusted-model" class="level3" data-number="3.3.3">
+<h3 data-number="3.3.3" class="anchored" data-anchor-id="adjusted-model"><span class="header-section-number">3.3.3</span> Adjusted Model</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>model1<span class="ot">&lt;-</span><span class="fu">coxph</span>(<span class="fu">Surv</span>(stag, event)<span class="sc">~</span>age <span class="sc">+</span> industry <span class="sc">+</span> profession <span class="sc">+</span> traffic <span class="sc">+</span> greywage <span class="sc">+</span> way <span class="sc">+</span> selfcontrol <span class="sc">+</span> anxiety,</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>                <span class="at">data =</span> turnover)</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+coxph(formula = Surv(stag, event) ~ age + industry + profession + 
+    traffic + greywage + way + selfcontrol + anxiety, data = turnover)
+
+  n= 1116, number of events= 560 
+
+                                  coef exp(coef) se(coef)      z Pr(&gt;|z|)    
+age                            0.02055   1.02076  0.00641  3.205 0.001349 ** 
+industryBanks                 -0.28975   0.74845  0.36289 -0.798 0.424614    
+industryBuilding              -0.26582   0.76658  0.38880 -0.684 0.494175    
+industryConsult               -0.45691   0.63324  0.36927 -1.237 0.215967    
+industryetc                   -0.64403   0.52517  0.36896 -1.746 0.080890 .  
+industryHoReCa                -0.77805   0.45930  0.54017 -1.440 0.149758    
+industryIT                    -1.24814   0.28704  0.38553 -3.237 0.001206 ** 
+industrymanufacture           -0.87933   0.41506  0.36757 -2.392 0.016744 *  
+industryMining                -0.65940   0.51716  0.44284 -1.489 0.136485    
+industryPharma                -1.04233   0.35263  0.47232 -2.207 0.027324 *  
+industryPowerGeneration       -1.09181   0.33561  0.44269 -2.466 0.013651 *  
+industryRealEstate            -1.81850   0.16227  0.58090 -3.130 0.001745 ** 
+industryRetail                -1.10739   0.33042  0.35511 -3.118 0.001818 ** 
+industryState                 -0.73784   0.47814  0.40157 -1.837 0.066154 .  
+industryTelecom               -1.25500   0.28508  0.43786 -2.866 0.004154 ** 
+industrytransport             -0.86358   0.42165  0.42212 -2.046 0.040775 *  
+professionBusinessDevelopment  0.59092   1.80564  0.50153  1.178 0.238702    
+professionCommercial           1.00727   2.73813  0.49840  2.021 0.043279 *  
+professionConsult              0.54819   1.73012  0.50936  1.076 0.281828    
+professionEngineer             0.94501   2.57284  0.52648  1.795 0.072662 .  
+professionetc                  0.45756   1.58021  0.48289  0.948 0.343360    
+professionFinance              0.05804   1.05976  0.51797  0.112 0.910784    
+professionHR                   0.22086   1.24714  0.42463  0.520 0.602987    
+professionIT                   0.02934   1.02978  0.47418  0.062 0.950654    
+professionLaw                  0.31703   1.37304  0.64071  0.495 0.620736    
+professionmanage               1.28255   3.60582  0.49774  2.577 0.009974 ** 
+professionMarketing            0.70287   2.01955  0.47822  1.470 0.141624    
+professionPR                   0.82179   2.27458  0.63824  1.288 0.197889    
+professionSales                0.50708   1.66044  0.45661  1.111 0.266774    
+professionTeaching             0.62625   1.87058  0.56833  1.102 0.270502    
+trafficempjs                   0.85644   2.35476  0.30998  2.763 0.005729 ** 
+trafficfriends                 0.03493   1.03555  0.33616  0.104 0.917244    
+trafficKA                      0.10265   1.10810  0.34993  0.293 0.769274    
+trafficrabrecNErab             0.48122   1.61805  0.30601  1.573 0.115817    
+trafficrecNErab               -0.12679   0.88092  0.37753 -0.336 0.736996    
+trafficreferal                 0.30802   1.36073  0.32125  0.959 0.337642    
+trafficyoujs                   0.60301   1.82761  0.30666  1.966 0.049257 *  
+greywagewhite                 -0.51396   0.59812  0.13401 -3.835 0.000125 ***
+waycar                        -0.21103   0.80975  0.10259 -2.057 0.039682 *  
+wayfoot                       -0.37776   0.68539  0.17333 -2.179 0.029301 *  
+selfcontrol                   -0.06082   0.94099  0.02269 -2.680 0.007353 ** 
+anxiety                       -0.04924   0.95196  0.02619 -1.880 0.060130 .  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+                              exp(coef) exp(-coef) lower .95 upper .95
+age                              1.0208     0.9797   1.00801    1.0337
+industryBanks                    0.7485     1.3361   0.36751    1.5243
+industryBuilding                 0.7666     1.3045   0.35777    1.6425
+industryConsult                  0.6332     1.5792   0.30707    1.3058
+industryetc                      0.5252     1.9041   0.25483    1.0823
+industryHoReCa                   0.4593     2.1772   0.15933    1.3240
+industryIT                       0.2870     3.4839   0.13483    0.6111
+industrymanufacture              0.4151     2.4093   0.20195    0.8531
+industryMining                   0.5172     1.9336   0.21711    1.2319
+industryPharma                   0.3526     2.8358   0.13973    0.8899
+industryPowerGeneration          0.3356     2.9797   0.14093    0.7992
+industryRealEstate               0.1623     6.1626   0.05197    0.5066
+industryRetail                   0.3304     3.0264   0.16474    0.6627
+industryState                    0.4781     2.0914   0.21764    1.0505
+industryTelecom                  0.2851     3.5078   0.12085    0.6725
+industrytransport                0.4217     2.3716   0.18435    0.9644
+professionBusinessDevelopment    1.8056     0.5538   0.67567    4.8254
+professionCommercial             2.7381     0.3652   1.03089    7.2727
+professionConsult                1.7301     0.5780   0.63753    4.6951
+professionEngineer               2.5728     0.3887   0.91679    7.2203
+professionetc                    1.5802     0.6328   0.61331    4.0715
+professionFinance                1.0598     0.9436   0.38398    2.9249
+professionHR                     1.2471     0.8018   0.54258    2.8666
+professionIT                     1.0298     0.9711   0.40656    2.6084
+professionLaw                    1.3730     0.7283   0.39112    4.8201
+professionmanage                 3.6058     0.2773   1.35933    9.5650
+professionMarketing              2.0195     0.4952   0.79103    5.1560
+professionPR                     2.2746     0.4396   0.65107    7.9465
+professionSales                  1.6604     0.6023   0.67850    4.0634
+professionTeaching               1.8706     0.5346   0.61406    5.6983
+trafficempjs                     2.3548     0.4247   1.28261    4.3232
+trafficfriends                   1.0355     0.9657   0.53583    2.0013
+trafficKA                        1.1081     0.9024   0.55810    2.2001
+trafficrabrecNErab               1.6181     0.6180   0.88821    2.9476
+trafficrecNErab                  0.8809     1.1352   0.42032    1.8463
+trafficreferal                   1.3607     0.7349   0.72498    2.5540
+trafficyoujs                     1.8276     0.5472   1.00196    3.3336
+greywagewhite                    0.5981     1.6719   0.45996    0.7778
+waycar                           0.8098     1.2349   0.66226    0.9901
+wayfoot                          0.6854     1.4590   0.48798    0.9627
+selfcontrol                      0.9410     1.0627   0.90005    0.9838
+anxiety                          0.9520     1.0505   0.90432    1.0021
+
+Concordance= 0.66  (se = 0.012 )
+Likelihood ratio test= 169.3  on 42 df,   p=&lt;2e-16
+Wald test            = 172.2  on 42 df,   p=&lt;2e-16
+Score (logrank) test = 178.8  on 42 df,   p=&lt;2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="hazard-ratios" class="level3" data-number="3.3.4">
+<h3 data-number="3.3.4" class="anchored" data-anchor-id="hazard-ratios"><span class="header-section-number">3.3.4</span> Hazard Ratios</h3>
+<p>Hazard ratios above 1 indicate a higher likelihood of the individuals in that category to experience the event (termination) in the given timeframe.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>hr<span class="ot">=</span><span class="fu">exp</span>(model1<span class="sc">$</span>coefficients)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>hr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          age                 industryBanks 
+                    1.0207593                     0.7484527 
+             industryBuilding               industryConsult 
+                    0.7665782                     0.6332371 
+                  industryetc                industryHoReCa 
+                    0.5251713                     0.4593025 
+                   industryIT           industrymanufacture 
+                    0.2870376                     0.4150602 
+               industryMining                industryPharma 
+                    0.5171611                     0.3526310 
+      industryPowerGeneration            industryRealEstate 
+                    0.3356074                     0.1622689 
+               industryRetail                 industryState 
+                    0.3304219                     0.4781437 
+              industryTelecom             industrytransport 
+                    0.2850769                     0.4216508 
+professionBusinessDevelopment          professionCommercial 
+                    1.8056453                     2.7381273 
+            professionConsult            professionEngineer 
+                    1.7301166                     2.5728377 
+                professionetc             professionFinance 
+                    1.5802152                     1.0597560 
+                 professionHR                  professionIT 
+                    1.2471440                     1.0297797 
+                professionLaw              professionmanage 
+                    1.3730396                     3.6058251 
+          professionMarketing                  professionPR 
+                    2.0195459                     2.2745773 
+              professionSales            professionTeaching 
+                    1.6604383                     1.8705848 
+                 trafficempjs                trafficfriends 
+                    2.3547649                     1.0355461 
+                    trafficKA            trafficrabrecNErab 
+                    1.1080976                     1.6180539 
+              trafficrecNErab                trafficreferal 
+                    0.8809202                     1.3607294 
+                 trafficyoujs                 greywagewhite 
+                    1.8276083                     0.5981229 
+                       waycar                       wayfoot 
+                    0.8097502                     0.6853927 
+                  selfcontrol                       anxiety 
+                    0.9409886                     0.9519574 </code></pre>
+</div>
+</div>
+<p>Our results show that age increases the likelihood of employee turnover, as well as certain professions such as Commercial, Engineering, and PR.</p>
+</section>
 </section>
 <section id="results" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="results"><span class="header-section-number">3.4</span> Results</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">Crude Model</th>
+<th style="text-align: center;">Adjusted Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Covariate</td>
+<td style="text-align: center;">Hazard ratio (95% CI), p-value</td>
+<td style="text-align: center;">Hazard ratio (95% CI), p-value</td>
+</tr>
+<tr class="even">
+<td>genderm</td>
+<td style="text-align: center;">(0.70, 1.15) 0.384</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="odd">
+<td><strong>age</strong></td>
+<td style="text-align: center;"><strong>(1.01, 1.04) 0.002</strong></td>
+<td style="text-align: center;"><strong>(1.01, 1.03) 0.001</strong></td>
+</tr>
+<tr class="even">
+<td>industryBanks</td>
+<td style="text-align: center;">(0.39, 1.64) 0.537</td>
+<td style="text-align: center;">(0.37, 1.52) 0.424</td>
+</tr>
+<tr class="odd">
+<td>industryBuilding</td>
+<td style="text-align: center;">(0.37, 1.73) 0.562</td>
+<td style="text-align: center;">(0.36, 1.64) 0.494</td>
+</tr>
+<tr class="even">
+<td>industryConsult</td>
+<td style="text-align: center;">(0.32, 1.42) 0.304</td>
+<td style="text-align: center;">(0.31, 1.31) 0.215</td>
+</tr>
+<tr class="odd">
+<td>industryetc</td>
+<td style="text-align: center;">(0.27, 1.18) 0.128</td>
+<td style="text-align: center;">(0.25, 1.08) 0.080</td>
+</tr>
+<tr class="even">
+<td>industryHoReCa</td>
+<td style="text-align: center;">(0.18, 1.53) 0.239</td>
+<td style="text-align: center;">(0.16, 1.32) 0.149</td>
+</tr>
+<tr class="odd">
+<td><strong>industryIT</strong></td>
+<td style="text-align: center;"><strong>(0.14, 0.66) 0.002</strong></td>
+<td style="text-align: center;"><strong>(0.13, 0.61) 0.001</strong></td>
+</tr>
+<tr class="even">
+<td><strong>industrymanufacture</strong></td>
+<td style="text-align: center;"><strong>(0.22, 0.94) 0.032</strong></td>
+<td style="text-align: center;"><strong>(0.20, 0.85) 0.016</strong></td>
+</tr>
+<tr class="odd">
+<td>industryMining</td>
+<td style="text-align: center;">(0.23, 1.32) 0.179</td>
+<td style="text-align: center;">(0.21,1.23) 0.136</td>
+</tr>
+<tr class="even">
+<td><strong>industryPharma</strong></td>
+<td style="text-align: center;"><strong>(0.14, 0.94) 0.036</strong></td>
+<td style="text-align: center;"><strong>(0.14, 0.89) 0.027</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>industryPowerGeneration</strong></td>
+<td style="text-align: center;"><strong>(0.15, 0.86) 0.022</strong></td>
+<td style="text-align: center;"><strong>(0.14, 0.80) 0.013</strong></td>
+</tr>
+<tr class="even">
+<td><strong>industryRealEstate</strong></td>
+<td style="text-align: center;"><strong>(0.06, 0.56) 0.003</strong></td>
+<td style="text-align: center;"><strong>(0.05, 0.51) 0.001</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>industryRetail</strong></td>
+<td style="text-align: center;"><strong>(0.17, 0.72) 0.004</strong></td>
+<td style="text-align: center;"><strong>(0.16, 0.66) 0.002</strong></td>
+</tr>
+<tr class="even">
+<td>industryState</td>
+<td style="text-align: center;">(0.23,1.15) 0.104</td>
+<td style="text-align: center;">(0.22, 1.05) 0.066</td>
+</tr>
+<tr class="odd">
+<td><strong>industryTelecom</strong></td>
+<td style="text-align: center;"><strong>(0.13, 0.73) 0.008</strong></td>
+<td style="text-align: center;"><strong>(0.12, 0.67) 0.004</strong></td>
+</tr>
+<tr class="even">
+<td><strong>industrytransport</strong></td>
+<td style="text-align: center;"><strong>(0.18, 0.99) 0.046</strong></td>
+<td style="text-align: center;"><strong>(0.18, 0.96) 0.041</strong></td>
+</tr>
+<tr class="odd">
+<td>professionBusinessDevelopment</td>
+<td style="text-align: center;">(0.67, 4.94) 0.237</td>
+<td style="text-align: center;">(0.68, 4.83) 0.238</td>
+</tr>
+<tr class="even">
+<td><strong>professionCommercial</strong></td>
+<td style="text-align: center;"><strong>(1.00, 7.34) 0.049</strong></td>
+<td style="text-align: center;"><strong>(1.03, 7.27) 0.043</strong></td>
+</tr>
+<tr class="odd">
+<td>professionConsult</td>
+<td style="text-align: center;">(0.64, 4.91) 0.272</td>
+<td style="text-align: center;">(0.64, 4.70) 0.281</td>
+</tr>
+<tr class="even">
+<td>professionEngineer</td>
+<td style="text-align: center;">(0.94, 7.80) 0.063</td>
+<td style="text-align: center;">(0.92, 7.22) 0.072</td>
+</tr>
+<tr class="odd">
+<td>professionetc</td>
+<td style="text-align: center;">(0.63, 4.22) 0.317</td>
+<td style="text-align: center;">(0.61, 4.07) 0.343</td>
+</tr>
+<tr class="even">
+<td>professionFinance</td>
+<td style="text-align: center;">(0.377, 2.96) 0.917</td>
+<td style="text-align: center;">(0.38, 2.92) 0.910</td>
+</tr>
+<tr class="odd">
+<td>professionHR</td>
+<td style="text-align: center;">(0.53, 2.84) 0.638</td>
+<td style="text-align: center;">(0.54, 2.87) 0.603</td>
+</tr>
+<tr class="even">
+<td>professionIT</td>
+<td style="text-align: center;">(0.41, 2.81) 0.887</td>
+<td style="text-align: center;">(0.41, 2.61) 0.951</td>
+</tr>
+<tr class="odd">
+<td>professionLaw</td>
+<td style="text-align: center;">(0.42, 5.33) 0.533</td>
+<td style="text-align: center;">(0.39, 4.82) 0.621</td>
+</tr>
+<tr class="even">
+<td><strong>professionmanage</strong></td>
+<td style="text-align: center;"><strong>(1.36, 9.63) 0.010</strong></td>
+<td style="text-align: center;"><strong>(1.36, 9.57) 0.01</strong></td>
+</tr>
+<tr class="odd">
+<td>professionMarketing</td>
+<td style="text-align: center;">(0.80, 5.32) 0.132</td>
+<td style="text-align: center;">(0.79, 5.16) 0.141</td>
+</tr>
+<tr class="even">
+<td>professionPR</td>
+<td style="text-align: center;">(0.66, 8.17) 0.186</td>
+<td style="text-align: center;">(0.65, 7.95) 0.197</td>
+</tr>
+<tr class="odd">
+<td>professionSales</td>
+<td style="text-align: center;">(0.66, 4.15) 0.280</td>
+<td style="text-align: center;">(0.68, 4.06) 0.266</td>
+</tr>
+<tr class="even">
+<td>professionTeaching</td>
+<td style="text-align: center;">(0.61, 5.66) 0.278</td>
+<td style="text-align: center;">(0.61, 5.70) 0.270</td>
+</tr>
+<tr class="odd">
+<td><strong>trafficempjs</strong></td>
+<td style="text-align: center;"><strong>(1.37, 4.69) 0.003</strong></td>
+<td style="text-align: center;"><strong>(1.28, 4.32) 0.006</strong></td>
+</tr>
+<tr class="even">
+<td>trafficfriends</td>
+<td style="text-align: center;">(0.58, 2.21) 0.721</td>
+<td style="text-align: center;">(0.54, 2.00) 0.917</td>
+</tr>
+<tr class="odd">
+<td>trafficKA</td>
+<td style="text-align: center;">(0.58, 2.30) 0.688</td>
+<td style="text-align: center;">(0.56, 2.20) 0.769</td>
+</tr>
+<tr class="even">
+<td>trafficrabrecNErab</td>
+<td style="text-align: center;">(0.94, 3.18) 0.077</td>
+<td style="text-align: center;">(0.89, 2.95) 0.115</td>
+</tr>
+<tr class="odd">
+<td>trafficrecNErab</td>
+<td style="text-align: center;">(0.45, 2.01) 0.893</td>
+<td style="text-align: center;">(0.42, 1.85) 0.736</td>
+</tr>
+<tr class="even">
+<td>trafficreferal</td>
+<td style="text-align: center;">(0.76, 2.73) 0.257</td>
+<td style="text-align: center;">(0.72, 2.55) 0.337</td>
+</tr>
+<tr class="odd">
+<td><strong>trafficyoujs</strong></td>
+<td style="text-align: center;"><strong>(1.05, 3.53) 0.034</strong></td>
+<td style="text-align: center;"><strong>(1.00, 3.33) 0.049</strong></td>
+</tr>
+<tr class="even">
+<td>coachno</td>
+<td style="text-align: center;">(0.85,1.316) 0.615</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="odd">
+<td>coachyes</td>
+<td style="text-align: center;">(0.92, 1.66) 0.164</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="even">
+<td>head_genderm</td>
+<td style="text-align: center;">(0.86, 1.29) 0.590</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="odd">
+<td><strong>greywagewhite</strong></td>
+<td style="text-align: center;"><strong>(0.46, 0.79) 0.0002</strong></td>
+<td style="text-align: center;"><strong>(0.46, 0.78) 0.0001</strong></td>
+</tr>
+<tr class="even">
+<td><strong>waycar</strong></td>
+<td style="text-align: center;"><strong>(0.67, 1.00) 0.052</strong></td>
+<td style="text-align: center;"><strong>(0.66, 0.99) 0.039</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>wayfoot</strong></td>
+<td style="text-align: center;"><strong>(0.48, 0.94) 0.020</strong></td>
+<td style="text-align: center;"><strong>(0.49, 0.96) 0.029</strong></td>
+</tr>
+<tr class="even">
+<td>extraversion</td>
+<td style="text-align: center;">(0.95, 1.09) 0.639</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="odd">
+<td>independ</td>
+<td style="text-align: center;">(0.91, 1.05) 0.587</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+<tr class="even">
+<td><strong>selfcontrol</strong></td>
+<td style="text-align: center;"><strong>(0.89, 1.02) 0.202</strong></td>
+<td style="text-align: center;"><strong>(0.90, 0.98) 0.007</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>anxiety</strong></td>
+<td style="text-align: center;"><strong>(0.89, 1.02) 0.158</strong></td>
+<td style="text-align: center;"><strong>(0.90, 1.00) 0.060</strong></td>
+</tr>
+<tr class="even">
+<td>novator</td>
+<td style="text-align: center;">(0.95, 1.07) 0.766</td>
+<td style="text-align: center;">Excluded</td>
+</tr>
+</tbody>
+</table>
+<p>The model comparison confirms our findings and subsequent refining of the model to achieve the best fit. Variables that did not meet assumption for proportional hazards were excluded as well as variables that were found to be non-significant.</p>
 </section>
 <section id="predictions" class="level2" data-number="3.5">
 <h2 data-number="3.5" class="anchored" data-anchor-id="predictions"><span class="header-section-number">3.5</span> Predictions</h2>
+<p>We will now use our adjusted model to predict 3-year survival rates between two employees, one age 25 and one age 55. All other variables will remain the same.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>new_hire <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>,<span class="dv">55</span>), <span class="at">industry =</span> <span class="fu">c</span>(<span class="st">"IT"</span>,<span class="st">"IT"</span>), <span class="at">stag=</span> <span class="fu">c</span>(<span class="dv">36</span>, <span class="dv">36</span>), <span class="at">event=</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">profession =</span> <span class="fu">c</span>(<span class="st">"manage"</span>,<span class="st">"manage"</span>), <span class="at">traffic =</span> <span class="fu">c</span>(<span class="st">"empjs"</span>,<span class="st">"empjs"</span>), <span class="at">greywage =</span> <span class="fu">c</span>(<span class="st">"white"</span>,<span class="st">"white"</span>), <span class="at">way =</span> <span class="fu">c</span>(<span class="st">"car"</span>,<span class="st">"car"</span>), <span class="at">independ =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>), <span class="at">selfcontrol =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>), <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">5</span>,<span class="dv">5</span>))</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>preds <span class="ot">&lt;-</span> <span class="fu">predict</span>(model1, <span class="at">newdata =</span> new_hire, <span class="at">type =</span> <span class="st">"survival"</span>, <span class="at">se.fit =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>new_hire<span class="sc">$</span>prob <span class="ot">&lt;-</span> preds<span class="sc">$</span>fit</span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>new_hire<span class="sc">$</span>lcl <span class="ot">&lt;-</span> preds<span class="sc">$</span>fit <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>preds<span class="sc">$</span>se.fit</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>new_hire<span class="sc">$</span>ucl <span class="ot">&lt;-</span> preds<span class="sc">$</span>fit <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>preds<span class="sc">$</span>se.fit</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>new_hire</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>  age industry stag event profession traffic greywage way independ selfcontrol
+1  25       IT   36     0     manage   empjs    white car        5           5
+2  55       IT   36     0     manage   empjs    white car        5           5
+  anxiety      prob         lcl       ucl
+1       5 0.3833291  0.12799615 0.6386621
+2       5 0.1693049 -0.05614262 0.3947524</code></pre>
+</div>
+</div>
+<p>Our results show a survival probability of 38% for the 25-year old, and 17% percent for the 55-year old.</p>
 </section>
 </section>
 <section id="conclusion" class="level1" data-number="4">
