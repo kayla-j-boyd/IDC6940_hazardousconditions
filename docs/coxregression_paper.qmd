@@ -8,7 +8,7 @@ bibliography: references.bib
 csl: ieee.csl
 link-external-icon: true
 number-sections: true
-code-overflow: wrap
+code-overflow: scroll
 code-fold: true
 code-summary: "Code"
 indent: true
