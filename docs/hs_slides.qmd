@@ -58,8 +58,7 @@ editor:
 ## Proportional Hazards assumption
 
 -   The assumption of a constant relationship between dependent and
-    explanatory variables is called proportional hazards
-    [@Bellera2010].
+    explanatory variables is called proportional hazards [@Bellera2010].
 
 ```{r}
 #| echo: FALSE
@@ -253,7 +252,6 @@ grid.arrange(plot1, plot2, plot3, ncol = 2)
 
 ## R packages used for survival analysis<br><br>
 
-```{=html}
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
@@ -263,16 +261,18 @@ grid.arrange(plot1, plot2, plot3, ncol = 2)
 .tg .tg-axmw{font-size:18px;font-weight:bold;text-align:center;vertical-align:middle}
 .tg .tg-ewmv{font-size:18px;text-align:left;vertical-align:middle}
 </style>
-```
-+-----------+------------------------------------------------------+
-| Package   | Description                                          |
-+===========+======================================================+
-| Survival  | \- Used for fitting and analyzing survival models\   |
-|           | - Fits Kaplan-Meier survival curves                  |
-+-----------+------------------------------------------------------+
-| Survminer | \- Plots Kaplan-Meier survival curves using ggplot2\ |
-|           | - Plots Schoenfeld residuals                         |
-+-----------+------------------------------------------------------+
+
++-------------+--------------------------------------------------+
+| Package     | Description                                      |
++=============+==================================================+
+| Survival    | \- Used for fitting and analyzing survival       |
+|             | models\                                          |
+|             | - Fits Kaplan-Meier survival curves              |
++-------------+--------------------------------------------------+
+| Survminer   | \- Plots Kaplan-Meier survival curves using      |
+|             | ggplot2\                                         |
+|             | - Plots Schoenfeld residuals                     |
++-------------+--------------------------------------------------+
 
 ## Cox regression modeling of survival after chemotherapy for colon cancer<br><br> {.smaller}
 
@@ -284,11 +284,20 @@ grid.arrange(plot1, plot2, plot3, ncol = 2)
 
 -   **Predictors**<br>
 
-| **Category**                | **Variables**                                                                                                                |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------|
-| **Treatments**              | \- Observation (no treatment) <br> - Amisole (Lev) <br> - Amisole + 5-FU                                                     |
-| **Patient Characteristics** | \- Age <br> - Sex                                                                                                            |
-| **Tumor Characteristics**   | \- Colon perforation and obstruction <br> - Adherence to nearby organs <br> - Tumor differentiation <br> - Local spread <br> |
++--------------+-------------------------------------------------------+
+| **Category** | **Variables**                                         |
++==============+=======================================================+
+| **           | \- Observation (no treatment) <br> - Amisole (Lev)    |
+| Treatments** | <br> - Amisole + 5-FU                                 |
++--------------+-------------------------------------------------------+
+| **Patient    | \- Age <br> - Sex                                     |
+| Chara        |                                                       |
+| cteristics** |                                                       |
++--------------+-------------------------------------------------------+
+| **Tumor      | \- Colon perforation and obstruction <br> - Adherence |
+| Chara        | to nearby organs <br> - Tumor differentiation <br> -  |
+| cteristics** | Local spread <br>                                     |
++--------------+-------------------------------------------------------+
 
 ------------------------------------------------------------------------
 

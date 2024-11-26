@@ -1,0 +1,312 @@
+---
+title: "Survival of the Fittest: Cox Regression Analysis"
+author: "Kayla Boyd"
+format: html
+editor: visual
+theme: quartz
+bibliography: references.bib
+csl: ieee.csl
+link-external-icon: true
+number-sections: true
+code-overflow: wrap
+code-fold: true
+code-summary: "Code"
+indent: true
+---
+
+[Slides](https://kayla-j-boyd.github.io/IDC6940_hazardousconditions/HazardousCond_slides.html#/title-slide)
+
+# Introduction
+
+The Cox Proportional Hazards Model, often referred to as Cox Regression, is a widely used statistical method for analyzing and modeling time-to-event data. Developed by Sir David Cox in 1972, this semi-parametric model is a powerful tool for understanding the relationship between predictors and the time until a specified event occurs, such as turnover, equipment failure, or customer churn.
+
+## Key Characteristics
+
+-   Semi-parametric Nature: Cox Regression does not assume a specific probability distribution for survival times. Instead, it focuses on the hazard ratio to evaluate the effect of predictors [@Zhang2016].
+
+-   Time-to-Event Analysis: It models the risk (hazard) of an event occurring at a specific time, considering that the event has not occurred before that time.
+
+-   Handles Censoring: Censoring occurs when the event hasn’t occurred for some subjects by the end of the study. Cox Regression effectively accounts for this.
+
+## **Applications of Cox Regression**
+
+Cox Regression is used across various fields to analyze survival data and event risks:
+
+### **Healthcare and Epidemiology**
+
+-   Studying survival rates in patients (e.g., cancer or heart disease).
+
+-   Evaluating the effect of treatments, such as comparing drug efficacy [@Hosmer2008].
+
+### **Business and Economics**
+
+-   Predicting customer churn or employee turnover.
+
+-   Analyzing time to equipment failure in operational systems.
+
+### **Engineering and Reliability**
+
+-   Modeling the lifespan of mechanical systems or components.
+
+-   Assessing risks in failure times of industrial systems.
+
+### **Social Sciences**
+
+-   Examining time until marriage, job changes, or retirement.
+
+-   Investigating relapse rates in criminology studies.
+
+## **Limitations of Cox Regression**
+
+While Cox Regression is versatile, it has limitations:
+
+1.  **Proportional Hazards Assumption**:
+
+    -   The model assumes that the hazard ratios between groups are constant over time. Violations of this assumption can lead to incorrect conclusions [@Hosmer2008].
+
+    -   *Example*: The effect of a predictor (like a treatment) may decrease or increase over time.
+
+2.  **Inability to Model Complex Time-Dependent Effects**:
+
+    -   The standard Cox model struggles with internal time-varying covariates (e.g., changing patient conditions) without additional adjustments.
+
+3.  **Difficulty with Small Sample Sizes**:
+
+    -   Requires adequate event numbers for reliable estimates.
+
+4.  **No Prediction of Exact Survival Times**:
+
+    -   It estimates relative risks and hazard ratios but does not predict when an event will occur.
+
+5.  **Overfitting**:
+
+    -   Including too many covariates relative to the number of events can lead to overfitting.
+
+# Methods
+
+In this study, we utilize the Cox Proportional Hazards Model to examine factors influencing survival. Cox Regression is a powerful tool in survival analysis that models the relationship between the survival time of subjects and one or more predictor variables. Survival can refer to development of a symptom, time to relapse, or time to death [@Walters2012]. Its appeal lies in its semi-parametric nature, as it does not assume a specific baseline hazard function, making it robust and popular in diverse fields like medicine, engineering, and social sciences.
+
+## Model Assumptions
+
+A key assumption of the Cox model is the proportional hazards assumption, which asserts that the effects of different variables on the outcome (survival) are constant over time. This means that, although the baseline hazard function can vary over time, the effect of covariates on the hazard is multiplicative and time-independent. Another essential assumption pertains to censoring, where it is assumed that censoring is non-informative, meaning it is unlikely that the event of interest will be observed in all patients and missing or erroneous results can therefore not be included. This differs from logistic or linear regression.
+
+## Model Variants
+
+The primary model employed in this study is the standard Cox Proportional Hazards model, which estimates the hazard function, $h(t | X) = h_0(t) \exp(\beta X)$, where $h_0(t)$represents the baseline hazard and $\beta$ represents the regression coefficients. In cases where the proportional hazards assumption does not hold, we may consider extensions like stratified Cox models, which allow for covariates that stratify the baseline hazard, or time-dependent Cox models, which can handle time-varying covariates.
+
+## Testing Proportional Hazards
+
+To verify the proportional hazards assumption, we employ the Schoenfeld residuals test, a common diagnostic that assesses correlation between residuals and time. Graphical methods, such as log-minus-log survival plots, are also used to visually inspect proportional hazards. If these diagnostics suggest a violation of the proportional hazards assumption, adjustments are made, including consideration of time-varying covariates.
+
+The image below shows an example of the graphical method using a Kaplan-Meier Survival Plot.
+
+```{r, warning=FALSE, message=FALSE}
+# Load necessary libraries
+library(survival)
+library(survminer)
+
+# Load the lung dataset
+data(lung)
+
+# Fit a Kaplan-Meier survival curve
+fit <- survfit(Surv(time, status) ~ sex, data = lung)
+
+# Plot the Kaplan-Meier survival curves
+ggsurvplot(fit, data = lung, 
+           pval = TRUE, 
+           conf.int = TRUE, 
+           risk.table = TRUE, 
+           ggtheme = theme_minimal(), 
+           legend.title = "Sex",
+           legend.labs = c("Male", "Female"))
+
+
+```
+
+## Interpretation of Outcomes
+
+The output of a Cox model is typically interpreted in terms of hazard ratios. For each predictor, the hazard ratio describes the change in the hazard of the event (e.g., death, failure) for a one-unit increase in the predictor, holding all other factors constant. A hazard ratio greater than one indicates an increased risk, while a ratio less than one suggests a protective effect. If the risk factor is binary, the result can be interpreted as the estimated increase in the hazard ratio in patients with the risk factor vs. those without [@Hafeez2021]. P-values and confidence intervals around hazard ratios help determine the statistical significance and reliability of these effects.
+
+## Addressing Time-Varying Coefficients
+
+To account for non-proportionality when it is detected, time-varying covariates may be introduced [@Zhang2018]. This involves creating interaction terms between covariates and functions of time or using an extended Cox model framework. This approach allows the impact of certain variables on the hazard to change over time, enhancing the model's flexibility and accuracy when the proportional hazards assumption does not strictly hold.
+
+# Data Analysis and Results
+
+## Dataset Description
+
+We will be applying our method to this dataset from [Kaggle](https://www.kaggle.com/datasets/davinwijaya/employee-turnover/data) that contains real data about employees at a Russian company. There are 16 variables in the dataset, both discrete and continuous, shown in the description table below.
+
+| Variable     | Description                                      |
+|--------------|--------------------------------------------------|
+| stag         | Experience (time)                                |
+| event        | Employee turnover                                |
+| gender       | Employee's gender                                |
+| age          | Employee's age (year)                            |
+| industry     | Employee's industry                              |
+| profession   | Employee's profession                            |
+| traffic      | From what pipelene employee came to the company. |
+| coach        | Presence of a coach (training) on probation      |
+| head_gender  | Head (supervisor) gender                         |
+| greywage     | The salary does not seem to the tax authorities. |
+| way          | Employee's way of transportation                 |
+| extraversion | Extroversion score                               |
+| independ     | Independence score                               |
+| selfcontrol  | Self control score                               |
+| anxiety      | Anxiety score                                    |
+| novator      | Innovator score                                  |
+
+## Data Preparation
+
+Read the data from our .csv file, load it, and take a quick look at some of the data.
+
+```{r, warning=FALSE, message=FALSE}
+
+library(readr)
+turnover <- read_csv("turnover.csv")
+head(turnover)
+
+library(cowplot)
+library(broom)
+library(tidyverse) 
+library(tidyr)
+library(dplyr)
+library(corrplot)
+library(RColorBrewer)
+library(ggfortify)
+library(riskRegression)
+library(survival)
+library(stringr)
+library(zoo)
+library(ranger)
+library(ggplot2)
+library(readxl)
+library(MASS)
+library(ADGofTest)
+library(survminer)
+library(car)
+library(gtsummary)
+library(ggplot2)
+library(gridExtra)
+library(janitor)
+library(magrittr)
+library(gt)
+library(knitr)
+library(kableExtra)
+```
+
+Let's check for missing and null values, censored observations (where the event being studied did not occur), and check the distribution of the data.
+
+```{r, warning= FALSE, message=FALSE}
+# Check for null and duplicate values
+
+cat("Number of missing values :", sum(is.na(turnover)))
+cat("Number of duplicates: ", turnover %>%
+    duplicated() %>%
+    sum())
+# Remove duplicate values
+
+turnover <- unique(turnover)
+
+# Check distribution of data
+
+turnover %>%
+  ggplot(aes(x = stag, color = factor(event),
+                              fill = factor(event))) +
+  geom_histogram(aes(y = ..density..), alpha = 0.5) +
+  geom_density(alpha = 0.05) + scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") + theme_minimal() + 
+  theme(legend.position = "top")
+
+# Check for censored observations
+
+n <- dim(turnover)[1]
+cat((n - sum(turnover$event))/n * 100, "% of observations are censored")
+
+
+```
+
+We can see that our data is skewed heavily to the right, we have no null values, and 49.8% of employees were not terminated.
+
+Now we will take a look at our covariates and separate them based on whether they are discrete or continuous in order to better visualize the distributions.
+
+```{r}
+# Separate variable based on type
+
+NUM_COLS <- c("stag", "age", "extraversion", "independ", "selfcontrol", "anxiety", "novator")
+CAT_COLS <- c("gender", "industry", "profession", "traffic", "coach", "head_gender", "greywage", "way")
+
+# Transform CAT_COLS into categorical type
+
+    for (COL in CAT_COLS){
+    turnover[COL] <- turnover[COL] %>% unlist() %>% factor()}
+```
+
+### Categorical Covariates
+
+```{r}
+# Categorical covariates
+
+# Selection of covariates (that are only discrete)
+turnover.cat <- turnover %>% 
+                select_if(is.factor) %>% 
+                mutate(event = turnover$event)
+
+g1 <- turnover.cat %>% ggplot(aes(x = gender, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) +
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g2 <- turnover.cat %>% ggplot(aes(x = industry, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g3 <-turnover.cat %>% ggplot(aes(x = profession, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g4 <- turnover.cat %>% ggplot(aes(x = traffic, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g5 <-turnover.cat %>% ggplot(aes(x = coach, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g6 <- turnover.cat %>% ggplot(aes(x = head_gender, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g7 <- turnover.cat %>% ggplot(aes(x = greywage, color = factor(event),
+                            fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+g8 <- turnover.cat %>% ggplot(aes(x = way, color = factor(event), 
+                                     fill = factor(event))) +
+  geom_bar(alpha = 0.5) + 
+  scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() + theme(legend.position = "top")
+
+plot_grid(g1, g2, g3, g4, g5, g6, g7, g8, 
+          labels = c ("Gender", "Industry", "Profession", "Traffic", "Coach", "Coach Gender", "Grey Wage", "Method of Transport"),
+          ncol = 2, nrow = 4)
+```
+
+## Statistical Modeling
+
+## Results
+
+## Predictions
+
+# Conclusion
+
+# References
+
+::: {#refs}
+:::
