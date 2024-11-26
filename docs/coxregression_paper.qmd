@@ -562,7 +562,7 @@ Our results show that age increases the likelihood of employee turnover, as well
 | **anxiety** | **(0.89, 1.02) 0.158** | **(0.90, 1.00) 0.060** |
 | novator | (0.95, 1.07) 0.766 | Excluded |
 
-The model comparison confirms our findings and subsequent refining of the model to achieve the best fit. Variables that did not meet assumption for proportional hazards were excluded as well as variables that were found to be non-significant.
+The model comparison confirms our findings and subsequent refining of the model to achieve the best fit. Variables that did not meet the assumption of proportional hazards were excluded as well as variables that were found to be non-significant.
 
 ## Predictions
 
