@@ -256,44 +256,49 @@ turnover.cat %>% ggplot(aes(x = gender, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) +
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
-  theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+  theme_minimal() + theme(legend.position = "top") 
+
 turnover.cat %>% ggplot(aes(x = industry, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = profession, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = traffic, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = coach, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = head_gender, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = greywage, color = factor(event),
                             fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
+
 turnover.cat %>% ggplot(aes(x = way, color = factor(event), 
                                      fill = factor(event))) +
   geom_bar(alpha = 0.5) + 
   scale_color_brewer(palette = "Dark2") + scale_fill_brewer(palette = "Dark2") +
   theme_minimal() + theme(legend.position = "top") + theme(panel.spacing.x = unit(30, "mm"))
-
-
 ```
 
 ### Continuous Covariates
