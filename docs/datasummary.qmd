@@ -1,0 +1,30 @@
+---
+title: "Data Summary"
+author: "Kayla Boyd"
+format: html
+editor: visual
+---
+
+## Dataset 5-Number Summary
+
+Employee Turnover from Kaggle
+
+16 variables across 1100 observations. No missing data in variables. Variables include personality info of employee, transport method, age, tenure, and profession.
+
+```{r, message=FALSE}
+library(readr)
+turnover <- read_csv("turnover.csv")
+head(turnover)
+fivenum(turnover$stag)
+```
+
+IBM Attrition Data
+
+32 variables across 1400 observations. No missing data in variables. Variables include employee performance, tenure, travel, employment type, marital status, income, age, and department.
+
+```{r, message=FALSE}
+library(readr)
+attrition <- read_csv("IBM_Attrition.csv")
+head(attrition)
+fivenum(attrition$YearsAtCompany)
+```
